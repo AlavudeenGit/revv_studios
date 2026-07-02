@@ -1,0 +1,3791 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Revv Studios — Revolutionizing Brands with AI, Creativity & Technology
+    </title>
+    <meta
+      name="description"
+      content="Revv Studios is a premium AI-first creative and digital marketing agency helping ambitious brands grow through AI video, web design, branding, and performance marketing."
+    />
+    <meta
+      property="og:title"
+      content="Revv Studios — Create. Scale. Dominate."
+    />
+    <meta
+      property="og:description"
+      content="AI-powered videos, premium websites, branding, and performance marketing for ambitious brands."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.13/lenis.min.js"></script>
+    <style>
+      :root {
+        --bg: #0a0f1c;
+        --section: #0d1424;
+        --card: rgba(255, 255, 255, 0.055);
+        --text: #f5f7fa;
+        --text-2: #9ca9be;
+        --border: rgba(255, 255, 255, 0.14);
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --accent: #14b8a6;
+        --shadow-sm:
+          0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.22);
+        --shadow-md:
+          0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.28);
+        --shadow-lg:
+          0 24px 64px rgba(0, 0, 0, 0.55), 0 8px 20px rgba(0, 0, 0, 0.35);
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: auto;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Manrope", sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--text);
+      }
+      .eyebrow {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-weight: 600;
+        font-size: 0.75rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 22px;
+        height: 2px;
+        background: var(--accent);
+        border-radius: 2px;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      ul {
+        list-style: none;
+      }
+      img,
+      video {
+        max-width: 100%;
+        display: block;
+      }
+      section {
+        position: relative;
+      }
+      .wrap {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0 32px;
+        position: relative;
+      }
+      ::selection {
+        background: var(--primary);
+        color: #fff;
+      }
+
+      /* reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+
+      /* Cursor */
+      .cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--primary);
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.25s var(--ease),
+          height 0.25s var(--ease),
+          background 0.25s var(--ease);
+        mix-blend-mode: difference;
+      }
+      .cursor.grow {
+        width: 48px;
+        height: 48px;
+        background: var(--accent);
+      }
+      @media (max-width: 900px) {
+        .cursor {
+          display: none;
+        }
+      }
+
+      /* progress */
+      .progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        z-index: 10000;
+        width: 0%;
+      }
+
+      /* NAV */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        padding: 20px 0;
+        background: rgb(56 56 56 / 55%);
+        backdrop-filter: blur(16px) saturate(160%);
+        border-color: var(--border);
+
+        transition:
+          background 0.4s var(--ease),
+          box-shadow 0.4s var(--ease),
+          padding 0.4s var(--ease),
+          border-color 0.4s var(--ease);
+        border-bottom: 1px solid transparent;
+      }
+      header.scrolled {
+        background: rgb(34 42 64 / 28%);
+        backdrop-filter: blur(16px) saturate(160%);
+        box-shadow: var(--shadow-sm);
+        padding: 14px 0;
+        border-color: var(--border);
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo {
+        font-family: "Manrope", sans-serif;
+        font-weight: 800;
+        font-size: 1.25rem;
+        letter-spacing: -0.02em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .logo .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        display: inline-block;
+      }
+      .nav-links {
+        display: flex;
+        gap: 36px;
+        align-items: center;
+      }
+      .nav-links a {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text-2);
+        position: relative;
+        padding: 4px 0;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 1.5px;
+        background: var(--primary);
+        transition: width 0.3s var(--ease);
+      }
+      .nav-links a:hover {
+        color: var(--text);
+      }
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+      .nav-cta {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .burger {
+        display: none;
+        width: 24px;
+        height: 18px;
+        position: relative;
+        cursor: pointer;
+      }
+      .burger span {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--text);
+        border-radius: 2px;
+        transition: 0.3s var(--ease);
+      }
+      .burger span:nth-child(1) {
+        top: 0;
+      }
+      .burger span:nth-child(2) {
+        top: 8px;
+      }
+      .burger span:nth-child(3) {
+        top: 16px;
+      }
+
+      /* buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 14px 28px;
+        border-radius: 100px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        cursor: pointer;
+        border: none;
+        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.28);
+      }
+      .btn-primary:hover {
+        background: var(--primary-dark);
+      }
+      .btn-outline {
+        background: transparent;
+        color: var(--text);
+        border: 1.5px solid var(--border);
+      }
+      .btn-outline:hover {
+        border-color: var(--text);
+      }
+      .btn-ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        transform: scale(0);
+        animation: ripple 0.6s var(--ease);
+        pointer-events: none;
+      }
+      @keyframes ripple {
+        to {
+          transform: scale(3);
+          opacity: 0;
+        }
+      }
+      .magnetic {
+        transition: transform 0.3s var(--ease);
+      }
+
+      /* HERO */
+      #bg-video-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 0;
+        overflow: hidden;
+        background: #0f172a;
+      }
+      #bg-video-container video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      /* subtle overlay for readability (optional) */
+      #bg-video-container::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        display: none;
+        pointer-events: none;
+      }
+      .hero {
+        height: 100vh;
+        min-height: 640px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        margin-top: 4%;
+        background: transparent !important;
+      }
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        display: none;
+      }
+      .hero-bg video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+      }
+      .hero-grid {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        opacity: 0.5;
+        background-image:
+          linear-gradient(var(--border) 1px, transparent 1px),
+          linear-gradient(90deg, var(--border) 1px, transparent 1px);
+        background-size: 64px 64px;
+        mask-image: radial-gradient(
+          ellipse 70% 60% at 50% 30%,
+          black 10%,
+          transparent 70%
+        );
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+      .hero .eyebrow {
+        justify-content: center;
+        margin-bottom: 24px;
+      }
+      .hero h1 {
+        font-size: clamp(3rem, 8vw, 6.4rem);
+        text-align: center;
+        line-height: 0.98;
+        max-width: 1100px;
+        margin: 0 auto 28px;
+      }
+      .hero h1 .line {
+        display: block;
+        overflow: hidden;
+      }
+      .hero h1 .line span {
+        display: inline-block;
+        transform: translateY(110%);
+      }
+      .hero h1 .accent-word {
+        color: var(--primary);
+      }
+      .hero-sub {
+        text-align: center;
+        max-width: 560px;
+        margin: 0 auto 44px;
+        color: var(--text-2);
+        font-size: 1.1rem;
+        font-weight: 400;
+      }
+      .hero-buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 76px;
+      }
+      .hero-stats {
+        display: flex;
+        justify-content: center;
+        gap: 0;
+        position: relative;
+        z-index: 2;
+      }
+      .stat {
+        text-align: center;
+        padding: 0 44px;
+        position: relative;
+      }
+      .stat:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 8px;
+        bottom: 8px;
+        width: 1px;
+        background: var(--border);
+      }
+      .stat-num {
+        font-family: "Manrope", sans-serif;
+        font-weight: 800;
+        font-size: 2.4rem;
+        color: var(--text);
+        letter-spacing: -0.02em;
+      }
+      .stat-label {
+        font-size: 0.82rem;
+        color: var(--text-2);
+        margin-top: 4px;
+      }
+      .scroll-cue {
+        position: absolute;
+        bottom: 36px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        color: var(--text-2);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      .scroll-cue .line-anim {
+        width: 1px;
+        height: 36px;
+        background: var(--border);
+        position: relative;
+        overflow: hidden;
+      }
+      .scroll-cue .line-anim::after {
+        content: "";
+        position: absolute;
+        top: -100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--primary);
+        animation: scrollcue 1.8s ease-in-out infinite;
+      }
+      @keyframes scrollcue {
+        0% {
+          top: -100%;
+        }
+        50% {
+          top: 0;
+        }
+        100% {
+          top: 100%;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .hero-stats {
+          flex-wrap: wrap;
+          gap: 20px 0;
+        }
+        .stat {
+          padding: 0 22px;
+        }
+      }
+
+      /* TRUSTED BY */
+      .trusted {
+        padding: 64px 0;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        background: var(--section);
+      }
+      .trusted-label {
+        text-align: center;
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-2);
+        margin-bottom: 36px;
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      .logo-marquee {
+        overflow: hidden;
+        position: relative;
+        -webkit-mask-image: linear-gradient(
+          90deg,
+          transparent,
+          black 10%,
+          black 90%,
+          transparent
+        );
+        mask-image: linear-gradient(
+          90deg,
+          transparent,
+          black 10%,
+          black 90%,
+          transparent
+        );
+      }
+      .logo-track {
+        display: flex;
+        gap: 80px;
+        width: max-content;
+        animation: marquee 26s linear infinite;
+      }
+      .logo-track span {
+        font-family: "Manrope", sans-serif;
+        font-weight: 700;
+        font-size: 1.3rem;
+        color: var(--text-2);
+        opacity: 0.55;
+        white-space: nowrap;
+        letter-spacing: -0.01em;
+      }
+      @keyframes marquee {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* SECTION HEADERS */
+      .section-head {
+        max-width: 640px;
+        margin-bottom: 64px;
+      }
+      .section-head.center {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+      .section-head h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        margin-top: 16px;
+        line-height: 1.08;
+      }
+      .section-head p {
+        color: var(--text-2);
+        margin-top: 18px;
+        font-size: 1.05rem;
+      }
+      .section-pad {
+        padding: 140px 0;
+      }
+      .bg-section {
+        background: var(--section);
+      }
+
+      /* ABOUT */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+      .about-visual {
+        aspect-ratio: 4/5;
+        border-radius: 28px;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(
+          155deg,
+          #0f172a 0%,
+          #1e293b 55%,
+          #0f172a 100%
+        );
+        box-shadow: var(--shadow-lg);
+      }
+      .about-visual::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            circle at 30% 20%,
+            rgba(37, 99, 235, 0.5),
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at 75% 80%,
+            rgba(20, 184, 166, 0.45),
+            transparent 50%
+          );
+      }
+      .about-visual .pulse-ring {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        transform: translate(-50%, -50%);
+      }
+      .about-visual .pulse-ring:nth-child(2) {
+        width: 280px;
+        height: 280px;
+      }
+      .about-visual .pulse-ring:nth-child(3) {
+        width: 380px;
+        height: 380px;
+      }
+      .about-visual .core {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 60px rgba(255, 255, 255, 0.6);
+      }
+      .about-copy .eyebrow {
+        margin-bottom: 16px;
+      }
+      .about-copy h2 {
+        font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+        margin-bottom: 22px;
+        line-height: 1.12;
+      }
+      .about-copy p {
+        color: var(--text-2);
+        font-size: 1.05rem;
+        margin-bottom: 20px;
+      }
+      .about-list {
+        margin-top: 32px;
+        display: grid;
+        gap: 18px;
+      }
+      .about-list li {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        font-size: 0.98rem;
+        color: var(--text);
+      }
+      .about-list li .ico {
+        flex-shrink: 0;
+        width: 26px;
+        height: 26px;
+        border-radius: 8px;
+        background: rgba(20, 184, 166, 0.12);
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      @media (max-width: 900px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+      }
+
+      /* SERVICES */
+      .services-tabs {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 56px;
+        flex-wrap: wrap;
+      }
+      .tab-btn {
+        padding: 11px 22px;
+        border-radius: 100px;
+        border: 1.5px solid var(--border);
+        background: var(--card);
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-weight: 600;
+        font-size: 0.86rem;
+        color: var(--text-2);
+        cursor: pointer;
+        transition: all 0.3s var(--ease);
+      }
+      .tab-btn.active {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+      .service-panel {
+        display: none;
+      }
+      .service-panel.active {
+        display: block;
+      }
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .service-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 32px;
+        box-shadow: var(--shadow-sm);
+        transition:
+          transform 0.35s var(--ease),
+          box-shadow 0.35s var(--ease),
+          border-color 0.35s var(--ease);
+      }
+      .service-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-md);
+        border-color: #cbd5e1;
+      }
+      .service-card .num {
+        font-family: "Manrope", sans-serif;
+        font-weight: 800;
+        font-size: 0.78rem;
+        color: var(--primary);
+        letter-spacing: 0.08em;
+      }
+      .service-card h4 {
+        font-size: 1.1rem;
+        margin: 14px 0 10px;
+      }
+      .service-card p {
+        font-size: 0.9rem;
+        color: var(--text-2);
+      }
+      @media (max-width: 900px) {
+        .service-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 600px) {
+        .service-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* AI VIDEO SHOWCASE */
+      .video-showcase {
+        background: #0f172a;
+        color: #fff;
+      }
+      .video-showcase .eyebrow {
+        color: var(--accent);
+      }
+      .video-showcase .eyebrow::before {
+        background: var(--primary);
+      }
+      .video-showcase h2 {
+        color: #fff;
+      }
+      .video-showcase .section-head p {
+        color: #94a3b8;
+      }
+      .video-carousel {
+        position: relative;
+      }
+      .video-carousel-track {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        padding-bottom: 6px;
+        scrollbar-width: none;
+        cursor: grab;
+      }
+      .video-carousel-track:active {
+        cursor: grabbing;
+      }
+      .video-carousel-track::-webkit-scrollbar {
+        display: none;
+      }
+      .video-carousel-track .video-card {
+        flex: 0 0 auto;
+        width: 260px;
+        scroll-snap-align: start;
+      }
+      .vc-arrow {
+        position: absolute;
+        top: 45%;
+        transform: translateY(-50%);
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        line-height: 1;
+        cursor: pointer;
+        backdrop-filter: blur(8px);
+        transition:
+          background 0.3s var(--ease),
+          border-color 0.3s var(--ease),
+          transform 0.3s var(--ease);
+        z-index: 3;
+      }
+      .vc-arrow:hover {
+        background: var(--primary);
+        border-color: var(--primary);
+      }
+      .vc-prev {
+        left: -14px;
+      }
+      .vc-next {
+        right: -14px;
+      }
+      .vc-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 28px;
+      }
+      .vc-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.22);
+        cursor: pointer;
+        border: none;
+        padding: 0;
+        transition:
+          background 0.3s var(--ease),
+          width 0.3s var(--ease);
+      }
+      .vc-dot.active {
+        background: var(--accent);
+        width: 22px;
+        border-radius: 4px;
+      }
+      @media (max-width: 900px) {
+        .vc-arrow {
+          display: none;
+        }
+      }
+      .video-card {
+        aspect-ratio: 9/16;
+        border-radius: 18px;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(160deg, #1e293b, #0f172a);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        cursor: pointer;
+      }
+      .video-card:nth-child(2) {
+        background: linear-gradient(160deg, #1d2b4a, #0f172a);
+      }
+      .video-card:nth-child(3) {
+        background: linear-gradient(160deg, #134e4a, #0f172a);
+      }
+      .video-card:nth-child(4) {
+        background: linear-gradient(160deg, #312e81, #0f172a);
+      }
+      .video-card video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .video-card .play {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(6px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        transition:
+          transform 0.3s var(--ease),
+          background 0.3s var(--ease);
+      }
+      .video-card:hover .play {
+        transform: translate(-50%, -50%) scale(1.12);
+        background: var(--primary);
+      }
+      .video-card .tag {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: #fff;
+        letter-spacing: 0.02em;
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      .video-card .tag span {
+        display: block;
+        color: #94a3b8;
+        font-weight: 500;
+        font-size: 0.68rem;
+        margin-top: 2px;
+      }
+      @media (max-width: 640px) {
+        .video-carousel-track .video-card {
+          width: 210px;
+        }
+      }
+
+      /* FEATURED PROJECTS - horizontal pin */
+      .projects-pin {
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
+      .projects-track {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        gap: 32px;
+        will-change: transform;
+        padding: 0 6vw;
+        position: relative;
+      }
+      .project-card {
+        flex: 0 0 auto;
+        width: min(76vw, 760px);
+        height: 74%;
+        border-radius: 28px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 44px;
+        color: #fff;
+      }
+      .project-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.72) 0%,
+          rgba(0, 0, 0, 0.15) 45%,
+          rgba(0, 0, 0, 0.05) 100%
+        );
+      }
+      .project-card .p-bg {
+        position: absolute;
+        inset: 0;
+      }
+      .p1 .p-bg {
+        background: linear-gradient(150deg, #1d4ed8, #0f172a 75%);
+      }
+      .p2 .p-bg {
+        background: linear-gradient(150deg, #0f766e, #0f172a 75%);
+      }
+      .p3 .p-bg {
+        background: linear-gradient(150deg, #312e81, #0f172a 75%);
+      }
+      .p4 .p-bg {
+        background: linear-gradient(150deg, #0ea5a5, #0f172a 75%);
+      }
+      .project-card .content {
+        position: relative;
+        z-index: 2;
+      }
+      .project-card .tag {
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+      .project-card h3 {
+        color: #fff;
+        font-size: 1.9rem;
+        margin-bottom: 10px;
+      }
+      .project-card p {
+        color: #e2e8f0;
+        font-size: 0.95rem;
+        max-width: 440px;
+        margin-bottom: 20px;
+      }
+      .project-meta {
+        display: flex;
+        gap: 26px;
+      }
+      .project-meta div span {
+        display: block;
+        font-size: 0.68rem;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 2px;
+      }
+      .project-meta div strong {
+        font-family: "Manrope", sans-serif;
+        font-size: 1.1rem;
+      }
+      .pin-progress {
+        position: absolute;
+        bottom: 32px;
+        right: 6vw;
+        z-index: 5;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-size: 0.78rem;
+        color: var(--text-2);
+      }
+
+      /* INDUSTRIES */
+      .industries-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      .industry-cell {
+        background: var(--card);
+        padding: 34px 24px;
+        transition: background 0.3s var(--ease);
+        cursor: default;
+      }
+      .industry-cell:hover {
+        background: var(--section);
+      }
+      .industry-cell .ico {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: rgba(37, 99, 235, 0.08);
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        font-weight: 700;
+      }
+      .industry-cell h4 {
+        font-size: 0.98rem;
+      }
+      @media (max-width: 900px) {
+        .industries-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* PROCESS */
+      .process-list {
+        display: flex;
+        flex-direction: column;
+      }
+      .process-item {
+        display: grid;
+        grid-template-columns: 110px 1fr 1fr;
+        gap: 32px;
+        align-items: start;
+        padding: 44px 0;
+        border-top: 1px solid var(--border);
+      }
+      .process-item:last-child {
+        border-bottom: 1px solid var(--border);
+      }
+      .process-item .p-num {
+        font-family: "Manrope", sans-serif;
+        font-weight: 800;
+        font-size: 1rem;
+        color: var(--primary);
+      }
+      .process-item h3 {
+        font-size: 1.4rem;
+      }
+      .process-item p {
+        color: var(--text-2);
+        font-size: 0.98rem;
+      }
+      @media (max-width: 900px) {
+        .process-item {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+      }
+
+      /* TECHNOLOGIES */
+      .tech-marquee-wrap {
+        overflow: hidden;
+        -webkit-mask-image: linear-gradient(
+          90deg,
+          transparent,
+          black 8%,
+          black 92%,
+          transparent
+        );
+        mask-image: linear-gradient(
+          90deg,
+          transparent,
+          black 8%,
+          black 92%,
+          transparent
+        );
+      }
+      .tech-track {
+        display: flex;
+        gap: 16px;
+        width: max-content;
+        animation: marquee 34s linear infinite reverse;
+      }
+      .tech-pill {
+        padding: 14px 26px;
+        border-radius: 100px;
+        border: 1px solid var(--border);
+        background: var(--card);
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-weight: 600;
+        font-size: 0.92rem;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .tech-pill .dot2 {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
+      /* RESULTS */
+      .results-band {
+        background: var(--bg);
+        color: #fff;
+      }
+      .results-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+      }
+      .result-stat {
+        text-align: center;
+      }
+      .result-stat .r-num {
+        font-family: "Manrope", sans-serif;
+        font-weight: 800;
+        font-size: 3.4rem;
+        letter-spacing: -0.02em;
+      }
+      .result-stat .r-num .accent {
+        color: var(--accent);
+      }
+      .result-stat p {
+        color: #94a3b8;
+        margin-top: 8px;
+        font-size: 0.92rem;
+      }
+      @media (max-width: 900px) {
+        .results-grid {
+          grid-template-columns: 1fr 1fr;
+          row-gap: 44px;
+        }
+      }
+
+      /* TESTIMONIALS */
+      .testi-track {
+        display: flex;
+        gap: 24px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 12px;
+        scrollbar-width: none;
+      }
+      .testi-track::-webkit-scrollbar {
+        display: none;
+      }
+      .testi-card {
+        flex: 0 0 auto;
+        width: min(88vw, 460px);
+        scroll-snap-align: start;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        padding: 36px;
+        box-shadow: var(--shadow-sm);
+      }
+      .testi-stars {
+        color: var(--accent);
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+        margin-bottom: 18px;
+      }
+      .testi-card p.quote {
+        font-size: 1.05rem;
+        color: var(--text);
+        margin-bottom: 26px;
+        line-height: 1.6;
+      }
+      .testi-person {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .testi-avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        flex-shrink: 0;
+      }
+      .testi-person strong {
+        display: block;
+        font-size: 0.92rem;
+      }
+      .testi-person span {
+        font-size: 0.82rem;
+        color: var(--text-2);
+      }
+
+      /* PRICING */
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        align-items: stretch;
+      }
+      .price-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 40px 32px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: var(--shadow-sm);
+        position: relative;
+      }
+      .price-card.featured {
+        border-color: var(--primary);
+        box-shadow: 0 20px 50px rgba(37, 99, 235, 0.14);
+        transform: scale(1.03);
+      }
+      .price-card.featured::before {
+        content: "Most Popular";
+        position: absolute;
+        top: -13px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--primary);
+        color: #fff;
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 6px 16px;
+        border-radius: 100px;
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      .price-name {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-weight: 600;
+        color: var(--text-2);
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+      }
+      .price-amt {
+        font-family: "Manrope", sans-serif;
+        font-weight: 800;
+        font-size: 2.2rem;
+        margin-bottom: 6px;
+      }
+      .price-amt span {
+        font-size: 0.95rem;
+        color: var(--text-2);
+        font-weight: 500;
+      }
+      .price-desc {
+        color: var(--text-2);
+        font-size: 0.88rem;
+        margin-bottom: 28px;
+      }
+      .price-feats {
+        display: grid;
+        gap: 13px;
+        margin-bottom: 32px;
+        flex: 1;
+      }
+      .price-feats li {
+        display: flex;
+        gap: 10px;
+        font-size: 0.9rem;
+        align-items: flex-start;
+      }
+      .price-feats li .ico {
+        color: var(--accent);
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+      @media (max-width: 900px) {
+        .pricing-grid {
+          grid-template-columns: 1fr;
+        }
+        .price-card.featured {
+          transform: none;
+        }
+      }
+
+      /* FAQ */
+      .faq-list {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      .faq-item {
+        border-bottom: 1px solid var(--border);
+      }
+      .faq-q {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 26px 4px;
+        cursor: pointer;
+        font-family: "Manrope", sans-serif;
+        font-weight: 700;
+        font-size: 1.02rem;
+      }
+      .faq-q .plus {
+        width: 22px;
+        height: 22px;
+        flex-shrink: 0;
+        position: relative;
+      }
+      .faq-q .plus::before,
+      .faq-q .plus::after {
+        content: "";
+        position: absolute;
+        background: var(--text);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .faq-q .plus::before {
+        width: 14px;
+        height: 2px;
+      }
+      .faq-q .plus::after {
+        width: 2px;
+        height: 14px;
+        transition: transform 0.3s var(--ease);
+      }
+      .faq-item.open .plus::after {
+        transform: translate(-50%, -50%) rotate(90deg) scaleY(0);
+      }
+      .faq-a {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s var(--ease);
+      }
+      .faq-a p {
+        color: var(--text-2);
+        padding: 0 4px 26px;
+        font-size: 0.96rem;
+        max-width: 640px;
+      }
+
+      /* BLOG */
+      .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .blog-card {
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        background: var(--card);
+        box-shadow: var(--shadow-sm);
+        transition:
+          transform 0.3s var(--ease),
+          box-shadow 0.3s var(--ease);
+      }
+      .blog-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-md);
+      }
+      .blog-thumb {
+        aspect-ratio: 16/10;
+        background: linear-gradient(150deg, #1e293b, #334155);
+        position: relative;
+      }
+      .blog-thumb.b2 {
+        background: linear-gradient(150deg, #0f766e, #134e4a);
+      }
+      .blog-thumb.b3 {
+        background: linear-gradient(150deg, #1d4ed8, #312e81);
+      }
+      .blog-cat {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        background: rgba(255, 255, 255, 0.92);
+        color: #0f172a;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 5px 12px;
+        border-radius: 100px;
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      .blog-body {
+        padding: 24px;
+      }
+      .blog-date {
+        font-size: 0.78rem;
+        color: var(--text-2);
+        margin-bottom: 10px;
+      }
+      .blog-body h4 {
+        font-size: 1.08rem;
+        line-height: 1.35;
+        margin-bottom: 10px;
+      }
+      .blog-body p {
+        font-size: 0.88rem;
+        color: var(--text-2);
+      }
+      @media (max-width: 900px) {
+        .blog-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* CONTACT */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+      }
+      .contact-info h2 {
+        font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+        margin-bottom: 18px;
+      }
+      .contact-info p {
+        color: var(--text-2);
+        margin-bottom: 36px;
+      }
+      .contact-detail {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        margin-bottom: 22px;
+      }
+      .contact-detail .ico {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: rgba(37, 99, 235, 0.08);
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-weight: 700;
+      }
+      .contact-detail strong {
+        display: block;
+        font-size: 0.9rem;
+      }
+      .contact-detail span {
+        font-size: 0.85rem;
+        color: var(--text-2);
+      }
+      .contact-form {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: var(--shadow-md);
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .field {
+        margin-bottom: 20px;
+      }
+      .field label {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      .field input,
+      .field select,
+      .field textarea {
+        width: 100%;
+        padding: 13px 16px;
+        border-radius: 12px;
+        border: 1.5px solid var(--border);
+        font-family: "Inter", sans-serif;
+        font-size: 0.94rem;
+        background: rgba(255, 255, 255, 0.055);
+        color: var(--text);
+        transition:
+          border-color 0.25s,
+          background 0.25s;
+      }
+      .field input::placeholder,
+      .field textarea::placeholder {
+        color: var(--text-2);
+        opacity: 0.75;
+      }
+      .field select {
+        color-scheme: dark;
+      }
+      .field input:focus,
+      .field select:focus,
+      .field textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        background: rgba(255, 255, 255, 0.09);
+      }
+      .field textarea {
+        resize: vertical;
+        min-height: 110px;
+      }
+      @media (max-width: 900px) {
+        .contact-grid {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* FOOTER */
+      footer {
+        background: #0f172a;
+        color: #cbd5e1;
+        padding-top: 100px;
+        position: relative;
+        overflow: hidden;
+      }
+      .footer-top {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;
+        gap: 40px;
+        padding-bottom: 64px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .footer-brand .logo {
+        color: #fff;
+      }
+      .footer-brand p {
+        color: #94a3b8;
+        font-size: 0.9rem;
+        margin-top: 16px;
+        max-width: 280px;
+      }
+      .footer-social {
+        display: flex;
+        gap: 10px;
+        margin-top: 24px;
+      }
+      .footer-social a {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.78rem;
+        transition:
+          background 0.3s,
+          border-color 0.3s;
+      }
+      .footer-social a:hover {
+        background: var(--primary);
+        border-color: var(--primary);
+      }
+      .fcol h5 {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-size: 0.82rem;
+        color: #fff;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+      .fcol li {
+        margin-bottom: 12px;
+      }
+      .fcol a {
+        font-size: 0.9rem;
+        color: #94a3b8;
+        transition: color 0.25s;
+      }
+      .fcol a:hover {
+        color: #fff;
+      }
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 28px 0;
+        font-size: 0.82rem;
+        color: #64748b;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .footer-bottom .flinks {
+        display: flex;
+        gap: 24px;
+      }
+      @media (max-width: 900px) {
+        .footer-top {
+          grid-template-columns: 1fr 1fr;
+        }
+        .footer-brand {
+          grid-column: 1/-1;
+        }
+      }
+
+      /* reveal utility */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      /* mobile nav */
+      .mobile-menu {
+        position: fixed;
+        inset: 0;
+        background: var(--bg);
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        padding: 100px 32px 40px;
+        transform: translateY(-100%);
+        transition: transform 0.5s var(--ease);
+      }
+      .mobile-menu.open {
+        transform: translateY(0);
+      }
+      .mobile-menu a {
+        font-family: "Manrope", sans-serif;
+        font-weight: 700;
+        font-size: 1.8rem;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      @media (max-width: 900px) {
+        .nav-links {
+          display: none;
+        }
+        .nav-cta .btn {
+          display: none;
+        }
+        .burger {
+          display: block;
+        }
+      }
+
+      /* ===================================================
+     CINEMATIC DYNAMIC SCROLL BACKGROUND SYSTEM
+     Additive layer only — no existing layout/typography/
+     color rules above this point are modified.
+  =================================================== */
+      .cine-host {
+        overflow: hidden;
+      }
+      .cine-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+        opacity: 0;
+        transform: scale(1.06);
+        filter: blur(8px);
+        transition:
+          opacity 1.4s var(--ease),
+          transform 2s var(--ease),
+          filter 1.4s var(--ease);
+        will-change: opacity, transform, filter;
+      }
+      .cine-bg.in {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0px);
+      }
+      .cine-bg canvas,
+      .cine-bg video,
+      .cine-bg img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .cine-bg .cine-lottie {
+        position: absolute;
+        inset: 0;
+      }
+      .cine-bg .cine-lottie svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* per-section tinted wash, keyed to the same brand tones already in use
+     — restores full readability over the moving layer beneath it */
+      .cine-overlay-light {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            circle at 18% 18%,
+            rgba(37, 99, 235, 0.22),
+            transparent 45%
+          ),
+          radial-gradient(
+            circle at 84% 82%,
+            rgba(20, 184, 166, 0.18),
+            transparent 50%
+          ),
+          rgba(10, 15, 28, 0.58);
+      }
+      .cine-overlay-dark {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            circle at 22% 20%,
+            rgba(37, 99, 235, 0.26),
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 78%,
+            rgba(20, 184, 166, 0.2),
+            transparent 55%
+          ),
+          rgba(6, 10, 20, 0.62);
+      }
+
+      /* animated gradient scenes (Layer: "Animated Gradient" bg-type) */
+      .cine-gradient {
+        position: absolute;
+        inset: 0;
+        background-size: 220% 220%;
+        animation: cineGradShift 20s ease-in-out infinite alternate;
+      }
+      @keyframes cineGradShift {
+        0% {
+          background-position: 0% 30%;
+        }
+        50% {
+          background-position: 100% 70%;
+        }
+        100% {
+          background-position: 30% 100%;
+        }
+      }
+      .cine-gradient--soft {
+        background-image:
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(37, 99, 235, 0.3),
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(20, 184, 166, 0.24),
+            transparent 55%
+          ),
+          linear-gradient(135deg, #0a0f1c, #0d1424);
+      }
+      .cine-gradient--premium {
+        background-image:
+          radial-gradient(
+            circle at 15% 85%,
+            rgba(37, 99, 235, 0.32),
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 85% 15%,
+            rgba(20, 184, 166, 0.28),
+            transparent 50%
+          ),
+          linear-gradient(135deg, #0a0f1c, #111a2e);
+      }
+      .cine-gradient--minimal {
+        background-image:
+          radial-gradient(
+            circle at 30% 40%,
+            rgba(37, 99, 235, 0.16),
+            transparent 55%
+          ),
+          linear-gradient(160deg, #0a0f1c, #0c1220);
+      }
+      .cine-gradient--subtle {
+        background-image:
+          radial-gradient(
+            circle at 30% 30%,
+            rgba(37, 99, 235, 0.35),
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 75% 75%,
+            rgba(20, 184, 166, 0.25),
+            transparent 55%
+          ),
+          linear-gradient(160deg, #0f172a, #111827);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .cine-bg {
+          transition: opacity 0.6s ease;
+          transform: none !important;
+          filter: none !important;
+        }
+        .cine-gradient {
+          animation: none;
+        }
+      }
+      @media (max-width: 700px) {
+        .cine-bg {
+          filter: none;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cursor" id="cursor"></div>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <header id="siteHeader">
+      <div class="wrap">
+        <nav>
+          <a href="#" class="logo"><span class="dot"></span>Revv Studios</a>
+          <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#projects">Work</a>
+            <a href="#industries">Industries</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#blog">Insights</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <div class="nav-cta">
+            <a href="#contact" class="btn btn-primary magnetic"
+              >Start Your Project</a
+            >
+            <div class="burger" id="burger">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#services">Services</a>
+      <a href="#projects">Work</a>
+      <a href="#industries">Industries</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#blog">Insights</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <!-- VIDEO BACKGROUND (always playing, no scroll control) -->
+    <div id="bg-video-container">
+      <video id="bg-video" muted loop playsinline autoplay preload="auto">
+        <source src="video/bg.mp4" type="video/mp4" />
+        <!-- fallback message if video fails -->
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-grid"></div>
+      <div class="wrap hero-content">
+        <div class="eyebrow">
+          Revolutionizing Brands with AI, Creativity &amp; Technology
+        </div>
+        <h1>
+          <span class="line"><span>Create.</span></span>
+          <span class="line"><span class="accent-word">Scale.</span></span>
+          <span class="line"><span>Dominate.</span></span>
+        </h1>
+        <p class="hero-sub">
+          Helping ambitious brands grow with AI-powered videos, premium
+          websites, branding, and performance marketing.
+        </p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary magnetic"
+            >Start Your Project</a
+          >
+          <a href="#projects" class="btn btn-outline magnetic"
+            >View Portfolio</a
+          >
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-num" data-count="100" data-suffix="+">0</div>
+            <div class="stat-label">Projects Delivered</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" data-count="25" data-suffix="+">0</div>
+            <div class="stat-label">Industries Served</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" data-count="98" data-suffix="%">0</div>
+            <div class="stat-label">Client Satisfaction</div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-cue">
+        <span>Scroll</span>
+        <div class="line-anim"></div>
+      </div>
+    </section>
+
+    <!-- TRUSTED BY -->
+    <section class="trusted cine-host" id="trusted">
+      <div class="trusted-label">
+        Trusted by ambitious teams across industries
+      </div>
+      <div class="logo-marquee">
+        <div class="logo-track">
+          <span>Al Najma Recruitment</span><span>Insync Coaching</span
+          ><span>Vantage Facilities</span><span>Northbridge Logistics</span
+          ><span>Cedar Health Group</span><span>Meridian Realty</span
+          ><span>Solace Hospitality</span><span>Orbit Manufacturing</span>
+          <span>Al Najma Recruitment</span><span>Insync Coaching</span
+          ><span>Vantage Facilities</span><span>Northbridge Logistics</span
+          ><span>Cedar Health Group</span><span>Meridian Realty</span
+          ><span>Solace Hospitality</span><span>Orbit Manufacturing</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section-pad cine-host" id="about">
+      <div class="wrap about-grid">
+        <div class="about-visual reveal">
+          <div class="pulse-ring"></div>
+          <div class="pulse-ring"></div>
+          <div class="pulse-ring"></div>
+          <div class="core"></div>
+        </div>
+        <!-- <video id="video" muted loop playsinline autoplay preload="auto">
+          <source src="workflow.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video> -->
+        <div class="about-copy reveal">
+          <div class="eyebrow">About Revv Studios</div>
+          <h2>
+            An AI-first studio built for brands that refuse to look ordinary.
+          </h2>
+          <p>
+            Revv Studios sits at the intersection of creative direction,
+            data-driven marketing, and applied AI. We don't bolt AI onto old
+            workflows — we design campaigns, videos, and websites around what's
+            possible today.
+          </p>
+          <p>
+            Our team has shipped recruitment campaigns for overseas hiring
+            agencies, security and facility management platforms, coaching and
+            education brands, and fast-growing SMEs — each one built to convert,
+            not just impress.
+          </p>
+          <ul class="about-list">
+            <li>
+              <span class="ico">01</span>Strategy-led creative, never templated
+            </li>
+            <li>
+              <span class="ico">02</span>In-house AI video and voice production
+            </li>
+            <li>
+              <span class="ico">03</span>Full-stack web builds, not page
+              builders
+            </li>
+            <li>
+              <span class="ico">04</span>Performance marketing tied to real
+              pipeline
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section-pad bg-section cine-host" id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">What We Do</div>
+          <h2>Four disciplines. One growth engine.</h2>
+          <p>
+            From AI-generated campaigns to enterprise-grade web platforms —
+            every service is built to move a specific metric, not just look good
+            in a deck.
+          </p>
+        </div>
+
+        <div class="services-tabs">
+          <button class="tab-btn active" data-tab="ai">AI Creative</button>
+          <button class="tab-btn" data-tab="marketing">
+            Digital Marketing
+          </button>
+          <button class="tab-btn" data-tab="web">Web</button>
+          <button class="tab-btn" data-tab="brand">Branding</button>
+        </div>
+
+        <div class="service-panel active" data-panel="ai">
+          <div class="service-grid">
+            <div class="service-card reveal">
+              <div class="num">01</div>
+              <h4>AI Commercials</h4>
+              <p>
+                Broadcast-ready spots produced at a fraction of traditional
+                shoot costs.
+              </p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">02</div>
+              <h4>AI Corporate Videos</h4>
+              <p>Polished company profiles and investor-ready brand films.</p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">03</div>
+              <h4>AI Recruitment Videos</h4>
+              <p>
+                Hiring campaigns with AI presenters, built for overseas
+                agencies.
+              </p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">04</div>
+              <h4>AI Product Videos</h4>
+              <p>Demo and launch videos that turn features into a story.</p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">05</div>
+              <h4>AI Explainer Videos</h4>
+              <p>
+                Complex processes, simplified into clear 60-90 second
+                narratives.
+              </p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">06</div>
+              <h4>AI Social Reels</h4>
+              <p>Short-form content engineered for retention and shares.</p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">07</div>
+              <h4>AI Voiceovers</h4>
+              <p>Natural, multilingual voice tracks matched to brand tone.</p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">08</div>
+              <h4>AI Avatars</h4>
+              <p>Custom digital presenters for training, sales, and support.</p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">09</div>
+              <h4>Motion Graphics</h4>
+              <p>Data visualizations and kinetic type that hold attention.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-panel" data-panel="marketing">
+          <div class="service-grid">
+            <div class="service-card reveal">
+              <div class="num">01</div>
+              <h4>Social Media Management</h4>
+              <p>Content calendars, community management, and brand voice.</p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">02</div>
+              <h4>Google Ads</h4>
+              <p>
+                Search and display campaigns built around intent, not
+                impressions.
+              </p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">03</div>
+              <h4>Meta Ads</h4>
+              <p>
+                Full-funnel Facebook and Instagram campaigns, tested weekly.
+              </p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">04</div>
+              <h4>LinkedIn Marketing</h4>
+              <p>
+                B2B lead generation for recruitment, facility and enterprise
+                brands.
+              </p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">05</div>
+              <h4>Lead Generation</h4>
+              <p>
+                Landing pages and funnels engineered to convert cold traffic.
+              </p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">06</div>
+              <h4>SEO</h4>
+              <p>
+                Technical, on-page and content SEO for durable organic growth.
+              </p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">07</div>
+              <h4>Content Strategy</h4>
+              <p>
+                Editorial calendars aligned to buyer stages, not vanity metrics.
+              </p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">08</div>
+              <h4>Email Marketing</h4>
+              <p>Nurture sequences and campaigns that keep pipeline warm.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-panel" data-panel="web">
+          <div class="service-grid">
+            <div class="service-card reveal">
+              <div class="num">01</div>
+              <h4>Corporate Websites</h4>
+              <p>Enterprise-grade sites built for credibility and speed.</p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">02</div>
+              <h4>Landing Pages</h4>
+              <p>
+                Conversion-focused pages for campaigns and product launches.
+              </p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">03</div>
+              <h4>Custom Web Apps</h4>
+              <p>
+                Full-stack applications built on modern, scalable architecture.
+              </p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">04</div>
+              <h4>E-commerce</h4>
+              <p>Storefronts built to sell, not just display products.</p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">05</div>
+              <h4>Portfolio Websites</h4>
+              <p>Showcase sites for studios, consultants and founders.</p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">06</div>
+              <h4>SEO Optimization</h4>
+              <p>Every build shipped fast, structured, and search-ready.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-panel" data-panel="brand">
+          <div class="service-grid">
+            <div class="service-card reveal">
+              <div class="num">01</div>
+              <h4>Logo</h4>
+              <p>Distinct marks designed to work at any scale.</p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">02</div>
+              <h4>Brand Identity</h4>
+              <p>Full visual systems — color, type, tone, and application.</p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">03</div>
+              <h4>Company Profile</h4>
+              <p>
+                Investor and client-facing profiles that build instant trust.
+              </p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">04</div>
+              <h4>Brochure</h4>
+              <p>
+                Print and digital brochures designed to close, not just inform.
+              </p>
+            </div>
+            <div class="service-card reveal">
+              <div class="num">05</div>
+              <h4>Pitch Deck</h4>
+              <p>
+                Narrative-driven decks built for funding and enterprise sales.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI VIDEO SHOWCASE -->
+    <section class="section-pad video-showcase cine-host" id="aiShowcase">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">AI Video Showcase</div>
+          <h2>Video, reimagined by AI — without losing the human touch.</h2>
+          <p>
+            A glimpse at the format, not the final cut. Every placeholder below
+            is built to drop in an MP4, WebM or Lottie render.
+          </p>
+        </div>
+        <div class="video-carousel">
+          <div class="video-carousel-track" id="videoCarouselTrack">
+            <div class="video-card reveal">
+              <div class="play">▶</div>
+              <div class="tag">
+                Recruitment Campaign<span>AI Presenter, Dubai Hiring</span>
+              </div>
+            </div>
+            <div class="video-card reveal">
+              <div class="play">▶</div>
+              <div class="tag">
+                Corporate Profile<span>Facility Management</span>
+              </div>
+            </div>
+            <div class="video-card reveal">
+              <div class="play">▶</div>
+              <div class="tag">
+                SOP Training<span>Cleaning &amp; Operations</span>
+              </div>
+            </div>
+            <div class="video-card reveal">
+              <div class="play">▶</div>
+              <div class="tag">
+                Social Reel<span>IELTS Coaching Promo</span>
+              </div>
+            </div>
+            <div class="video-card reveal">
+              <div class="play">▶</div>
+              <div class="tag">
+                Product Launch<span>AI Commercial Spot</span>
+              </div>
+            </div>
+            <div class="video-card reveal">
+              <div class="play">▶</div>
+              <div class="tag">
+                Explainer Video<span>Onboarding Walkthrough</span>
+              </div>
+            </div>
+          </div>
+          <button
+            class="vc-arrow vc-prev"
+            id="vcPrev"
+            aria-label="Previous video"
+          >
+            ‹
+          </button>
+          <button class="vc-arrow vc-next" id="vcNext" aria-label="Next video">
+            ›
+          </button>
+          <div class="vc-dots" id="vcDots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED PROJECTS (pinned horizontal) -->
+    <section id="projects">
+      <div class="wrap" style="padding-top: 110px; padding-bottom: 56px">
+        <div class="section-head">
+          <div class="eyebrow">Featured Projects</div>
+          <h2>Case studies, not portfolio filler.</h2>
+          <p>
+            Scroll to move through recent work across recruitment, facility
+            management, and education.
+          </p>
+        </div>
+      </div>
+      <div class="projects-pin" id="projectsPin">
+        <div class="projects-track" id="projectsTrack">
+          <div class="project-card p1">
+            <div class="p-bg"></div>
+            <div class="content">
+              <div class="tag">Recruitment · UAE</div>
+              <h3>Al Najma International — Hiring Campaign</h3>
+              <p>
+                26-video AI recruitment series with a branded AI presenter,
+                built to fill overseas hiring pipelines faster.
+              </p>
+              <div class="project-meta">
+                <div><span>Deliverables</span><strong>26 Videos</strong></div>
+                <div><span>Reach</span><strong>1.2M+</strong></div>
+                <div><span>Timeline</span><strong>8 Weeks</strong></div>
+              </div>
+            </div>
+          </div>
+          <div class="project-card p2">
+            <div class="p-bg"></div>
+            <div class="content">
+              <div class="tag">Facility Management</div>
+              <h3>Soft Services Platform Redesign</h3>
+              <p>
+                Rebuilt quote engine with a live cost calculator and a
+                multi-page proposal generator exported straight to PDF.
+              </p>
+              <div class="project-meta">
+                <div><span>Conversion</span><strong>+64%</strong></div>
+                <div><span>Load Time</span><strong>1.4s</strong></div>
+                <div><span>Timeline</span><strong>6 Weeks</strong></div>
+              </div>
+            </div>
+          </div>
+          <div class="project-card p3">
+            <div class="p-bg"></div>
+            <div class="content">
+              <div class="tag">Education · IELTS/OET</div>
+              <h3>Insync Chennai — Content Engine</h3>
+              <p>
+                Full Instagram content strategy and production pipeline for a
+                coaching institute, rebuilt around enrollment goals.
+              </p>
+              <div class="project-meta">
+                <div><span>Followers</span><strong>+38%</strong></div>
+                <div><span>Engagement</span><strong>4.1x</strong></div>
+                <div><span>Timeline</span><strong>Ongoing</strong></div>
+              </div>
+            </div>
+          </div>
+          <div class="project-card p4">
+            <div class="p-bg"></div>
+            <div class="content">
+              <div class="tag">Manufacturing</div>
+              <h3>Orbit Manufacturing — Corporate Rebrand</h3>
+              <p>
+                Full identity system, company profile and pitch deck for a
+                Series B fundraise.
+              </p>
+              <div class="project-meta">
+                <div><span>Raised</span><strong>$4.2M</strong></div>
+                <div><span>Assets</span><strong>40+</strong></div>
+                <div><span>Timeline</span><strong>10 Weeks</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pin-progress">Scroll to explore →</div>
+      </div>
+    </section>
+
+    <!-- INDUSTRIES -->
+    <section class="section-pad bg-section cine-host" id="industries">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Industries</div>
+          <h2>Built for operators, not just brand teams.</h2>
+        </div>
+        <div class="industries-grid">
+          <div class="industry-cell reveal">
+            <div class="ico">01</div>
+            <h4>Recruitment Agencies</h4>
+          </div>
+          <div class="industry-cell reveal">
+            <div class="ico">02</div>
+            <h4>Overseas Consultants</h4>
+          </div>
+          <div class="industry-cell reveal">
+            <div class="ico">03</div>
+            <h4>Facility Management</h4>
+          </div>
+          <div class="industry-cell reveal">
+            <div class="ico">04</div>
+            <h4>Security Companies</h4>
+          </div>
+          <div class="industry-cell reveal">
+            <div class="ico">05</div>
+            <h4>Healthcare</h4>
+          </div>
+          <div class="industry-cell reveal">
+            <div class="ico">06</div>
+            <h4>Manufacturing</h4>
+          </div>
+          <div class="industry-cell reveal">
+            <div class="ico">07</div>
+            <h4>Construction</h4>
+          </div>
+          <div class="industry-cell reveal">
+            <div class="ico">08</div>
+            <h4>Logistics</h4>
+          </div>
+          <div class="industry-cell reveal">
+            <div class="ico">09</div>
+            <h4>Real Estate</h4>
+          </div>
+          <div class="industry-cell reveal">
+            <div class="ico">10</div>
+            <h4>Educational Institutions</h4>
+          </div>
+          <div class="industry-cell reveal">
+            <div class="ico">11</div>
+            <h4>SMEs</h4>
+          </div>
+          <div class="industry-cell reveal">
+            <div class="ico">12</div>
+            <h4>Restaurants &amp; Hotels</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="section-pad cine-host" id="process">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Process</div>
+          <h2>A five-stage system, run the same way every time.</h2>
+        </div>
+        <div class="process-list">
+          <div class="process-item reveal">
+            <div class="p-num">01</div>
+            <h3>Discover</h3>
+            <p>
+              We map your market, competitors, and the specific outcome this
+              project needs to hit.
+            </p>
+          </div>
+          <div class="process-item reveal">
+            <div class="p-num">02</div>
+            <h3>Strategy</h3>
+            <p>
+              A creative and channel plan, scoped against budget and timeline
+              before anything is built.
+            </p>
+          </div>
+          <div class="process-item reveal">
+            <div class="p-num">03</div>
+            <h3>Design &amp; Produce</h3>
+            <p>
+              Design, video, and copy move in parallel — reviewed together, not
+              in silos.
+            </p>
+          </div>
+          <div class="process-item reveal">
+            <div class="p-num">04</div>
+            <h3>Launch</h3>
+            <p>
+              QA'd, performance-tested, and shipped with tracking wired in from
+              day one.
+            </p>
+          </div>
+          <div class="process-item reveal">
+            <div class="p-num">05</div>
+            <h3>Optimize</h3>
+            <p>
+              Weekly performance reviews, with creative and targeting iterated
+              against real data.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNOLOGIES -->
+    <section class="section-pad bg-section cine-host" id="tech">
+      <div class="wrap">
+        <div class="section-head center">
+          <div class="eyebrow">Technologies</div>
+          <h2>The stack behind the studio.</h2>
+        </div>
+      </div>
+      <div class="tech-marquee-wrap">
+        <div class="tech-track">
+          <div class="tech-pill"><span class="dot2"></span>Angular</div>
+          <div class="tech-pill"><span class="dot2"></span>React</div>
+          <div class="tech-pill"><span class="dot2"></span>Node.js</div>
+          <div class="tech-pill"><span class="dot2"></span>ASP.NET Core</div>
+          <div class="tech-pill"><span class="dot2"></span>PostgreSQL</div>
+          <div class="tech-pill"><span class="dot2"></span>Docker</div>
+          <div class="tech-pill"><span class="dot2"></span>GSAP</div>
+          <div class="tech-pill"><span class="dot2"></span>Three.js</div>
+          <div class="tech-pill"><span class="dot2"></span>OpenAI</div>
+          <div class="tech-pill"><span class="dot2"></span>ElevenLabs</div>
+          <div class="tech-pill"><span class="dot2"></span>Figma</div>
+          <div class="tech-pill">
+            <span class="dot2"></span>Meta Business Suite
+          </div>
+          <div class="tech-pill"><span class="dot2"></span>Angular</div>
+          <div class="tech-pill"><span class="dot2"></span>React</div>
+          <div class="tech-pill"><span class="dot2"></span>Node.js</div>
+          <div class="tech-pill"><span class="dot2"></span>ASP.NET Core</div>
+          <div class="tech-pill"><span class="dot2"></span>PostgreSQL</div>
+          <div class="tech-pill"><span class="dot2"></span>Docker</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="section-pad results-band cine-host" id="results">
+      <div class="wrap">
+        <div class="section-head center" style="max-width: 600px">
+          <div
+            class="eyebrow"
+            style="color: var(--accent); justify-content: center"
+          >
+            Results
+          </div>
+          <h2 style="color: #fff">Numbers our clients actually track.</h2>
+        </div>
+        <div class="results-grid">
+          <div class="result-stat">
+            <div class="r-num">
+              <span class="accent" data-count="3.4">0</span>x
+            </div>
+            <p>Average ROAS across managed ad accounts</p>
+          </div>
+          <div class="result-stat">
+            <div class="r-num">
+              <span class="accent" data-count="64">0</span>%
+            </div>
+            <p>Average lift in landing page conversion</p>
+          </div>
+          <div class="result-stat">
+            <div class="r-num">
+              <span class="accent" data-count="120">0</span>+
+            </div>
+            <p>AI videos produced for clients</p>
+          </div>
+          <div class="result-stat">
+            <div class="r-num">
+              <span class="accent" data-count="98">0</span>%
+            </div>
+            <p>Client retention past first engagement</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section-pad cine-host" id="testimonials">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Testimonials</div>
+          <h2>What it's like working with us.</h2>
+        </div>
+      </div>
+      <div class="wrap">
+        <div class="testi-track">
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="quote">
+              Revv rebuilt our entire hiring campaign around AI video and our
+              response rate from candidates more than doubled in six weeks.
+            </p>
+            <div class="testi-person">
+              <div class="testi-avatar"></div>
+              <div>
+                <strong>Farida Al Mansoori</strong
+                ><span>Recruitment Director, Al Najma International</span>
+              </div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="quote">
+              The new quote calculator alone paid for the whole website rebuild
+              within the first month of leads.
+            </p>
+            <div class="testi-person">
+              <div class="testi-avatar"></div>
+              <div>
+                <strong>Rashid Hameed</strong
+                ><span>Operations Head, Facility Services</span>
+              </div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="quote">
+              Our Instagram finally looks like a brand people trust with their
+              IELTS prep, not just another coaching page.
+            </p>
+            <div class="testi-person">
+              <div class="testi-avatar"></div>
+              <div>
+                <strong>Shane Jordan</strong
+                ><span>Founder, Insync Chennai</span>
+              </div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="quote">
+              Fast, opinionated, and genuinely strategic — exactly what an
+              early-stage brand needs from an agency.
+            </p>
+            <div class="testi-person">
+              <div class="testi-avatar"></div>
+              <div>
+                <strong>Meera Krishnan</strong
+                ><span>Founder, Orbit Manufacturing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section-pad bg-section cine-host" id="pricing">
+      <div class="wrap">
+        <div class="section-head center">
+          <div class="eyebrow">Pricing</div>
+          <h2>Three ways to work with us.</h2>
+          <p>
+            Every engagement is scoped to the outcome — these are starting
+            points, not fixed menus.
+          </p>
+        </div>
+        <div class="pricing-grid">
+          <div class="price-card">
+            <div class="price-name">Launch</div>
+            <div class="price-amt">₹45,000<span>/ project</span></div>
+            <p class="price-desc">
+              For SMEs and founders who need a credible digital presence, fast.
+            </p>
+            <ul class="price-feats">
+              <li><span class="ico">✓</span>5-page corporate website</li>
+              <li><span class="ico">✓</span>Brand identity starter kit</li>
+              <li><span class="ico">✓</span>Basic SEO setup</li>
+              <li><span class="ico">✓</span>2 weeks delivery</li>
+            </ul>
+            <a href="#contact" class="btn btn-outline magnetic">Get Started</a>
+          </div>
+          <div class="price-card featured">
+            <div class="price-name">Scale</div>
+            <div class="price-amt">₹1,25,000<span>/ month</span></div>
+            <p class="price-desc">
+              For growing brands running content, ads, and video in tandem.
+            </p>
+            <ul class="price-feats">
+              <li><span class="ico">✓</span>Everything in Launch</li>
+              <li><span class="ico">✓</span>4 AI videos per month</li>
+              <li><span class="ico">✓</span>Social media management</li>
+              <li><span class="ico">✓</span>Google &amp; Meta ad management</li>
+              <li><span class="ico">✓</span>Monthly performance reporting</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary magnetic">Get Started</a>
+          </div>
+          <div class="price-card">
+            <div class="price-name">Dominate</div>
+            <div class="price-amt">Custom</div>
+            <p class="price-desc">
+              For enterprises needing a full in-house-grade creative and growth
+              team.
+            </p>
+            <ul class="price-feats">
+              <li><span class="ico">✓</span>Everything in Scale</li>
+              <li><span class="ico">✓</span>Dedicated account strategist</li>
+              <li><span class="ico">✓</span>Custom web app development</li>
+              <li><span class="ico">✓</span>Unlimited creative revisions</li>
+            </ul>
+            <a href="#contact" class="btn btn-outline magnetic">Talk to Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-pad cine-host" id="faq">
+      <div class="wrap">
+        <div class="section-head center">
+          <div class="eyebrow">FAQ</div>
+          <h2>Questions we get asked often.</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item open">
+            <div class="faq-q">
+              <span>How is AI video actually used in your production?</span>
+              <div class="plus"></div>
+            </div>
+            <div class="faq-a">
+              <p>
+                AI handles avatars, voiceover, and first-pass edits — our team
+                directs the script, brand tone, and final cut so nothing feels
+                generic or off-brand.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span>Do you work with clients outside India?</span>
+              <div class="plus"></div>
+            </div>
+            <div class="faq-a">
+              <p>
+                Yes. We currently support clients across the UAE and GCC region
+                alongside our Chennai-based client base, working fully remote
+                with async reviews.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span>What's the typical turnaround for a website?</span>
+              <div class="plus"></div>
+            </div>
+            <div class="faq-a">
+              <p>
+                Landing pages ship in 1-2 weeks. Full corporate websites or
+                custom web apps typically run 4-8 weeks depending on scope.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span>Can you manage ads and content together?</span>
+              <div class="plus"></div>
+            </div>
+            <div class="faq-a">
+              <p>
+                Yes — our Scale plan bundles content production with Google and
+                Meta ad management so creative and media buying stay in sync.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span>Do you sign NDAs and long-term contracts?</span>
+              <div class="plus"></div>
+            </div>
+            <div class="faq-a">
+              <p>
+                We're happy to sign NDAs on request. Engagements start
+                month-to-month, with longer terms available once we've proven
+                fit.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section class="section-pad bg-section cine-host" id="blog">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Insights</div>
+          <h2>Notes on AI, marketing, and building brands.</h2>
+        </div>
+        <div class="blog-grid">
+          <div class="blog-card reveal">
+            <div class="blog-thumb"><span class="blog-cat">AI Video</span></div>
+            <div class="blog-body">
+              <div class="blog-date">June 2026</div>
+              <h4>
+                Why AI presenters are replacing traditional recruitment video
+                shoots
+              </h4>
+              <p>
+                What changes — and what doesn't — when your hiring campaign runs
+                on an AI avatar.
+              </p>
+            </div>
+          </div>
+          <div class="blog-card reveal">
+            <div class="blog-thumb b2"><span class="blog-cat">Web</span></div>
+            <div class="blog-body">
+              <div class="blog-date">May 2026</div>
+              <h4>
+                The real cost of a slow quote form for facility management
+                brands
+              </h4>
+              <p>
+                How a live cost calculator changed conversion for one of our
+                clients.
+              </p>
+            </div>
+          </div>
+          <div class="blog-card reveal">
+            <div class="blog-thumb b3">
+              <span class="blog-cat">Strategy</span>
+            </div>
+            <div class="blog-body">
+              <div class="blog-date">April 2026</div>
+              <h4>
+                Building an Instagram content engine for coaching institutes
+              </h4>
+              <p>
+                A framework for turning enrollment goals into a weekly content
+                calendar.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section-pad cine-host" id="contact">
+      <div class="wrap contact-grid">
+        <div class="contact-info">
+          <div class="eyebrow">Get in Touch</div>
+          <h2>Let's build something that actually moves the needle.</h2>
+          <p>
+            Tell us about your project and we'll come back with a scoped plan
+            within 48 hours.
+          </p>
+          <div class="contact-detail">
+            <div class="ico">@</div>
+            <div><strong>Email</strong><span>hello@revvstudios.com</span></div>
+          </div>
+          <div class="contact-detail">
+            <div class="ico">☎</div>
+            <div><strong>Phone</strong><span>+91 98765 43210</span></div>
+          </div>
+          <div class="contact-detail">
+            <div class="ico">◉</div>
+            <div>
+              <strong>Studio</strong><span>Chennai, Tamil Nadu, India</span>
+            </div>
+          </div>
+        </div>
+        <form
+          class="contact-form"
+          onsubmit="
+            event.preventDefault();
+            this.querySelector('.btn').textContent = 'Sent ✓';
+          "
+        >
+          <div class="form-row">
+            <div class="field">
+              <label>Full name</label
+              ><input type="text" placeholder="Your name" required />
+            </div>
+            <div class="field">
+              <label>Company</label
+              ><input type="text" placeholder="Company name" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>Email</label
+              ><input type="email" placeholder="you@company.com" required />
+            </div>
+            <div class="field">
+              <label>Service</label>
+              <select>
+                <option>AI Creative</option>
+                <option>Digital Marketing</option>
+                <option>Web</option>
+                <option>Branding</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Project details</label
+            ><textarea
+              placeholder="Tell us about your project and timeline"
+            ></textarea>
+          </div>
+          <button class="btn btn-primary magnetic" style="width: 100%">
+            Send Message
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <footer id="footer">
+      <div class="wrap">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a href="#" class="logo"><span class="dot"></span>Revv Studios</a>
+            <p>
+              Revolutionizing brands with AI, creativity and technology — from
+              Chennai, for the world.
+            </p>
+            <div class="footer-social">
+              <a href="#">in</a><a href="#">ig</a><a href="#">yt</a
+              ><a href="#">x</a>
+            </div>
+          </div>
+          <div class="fcol">
+            <h5>Services</h5>
+            <ul>
+              <li><a href="#services">AI Creative</a></li>
+              <li><a href="#services">Digital Marketing</a></li>
+              <li><a href="#services">Web</a></li>
+              <li><a href="#services">Branding</a></li>
+            </ul>
+          </div>
+          <div class="fcol">
+            <h5>Company</h5>
+            <ul>
+              <li><a href="#about">About</a></li>
+              <li><a href="#projects">Work</a></li>
+              <li><a href="#blog">Insights</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="fcol">
+            <h5>Industries</h5>
+            <ul>
+              <li><a href="#industries">Recruitment</a></li>
+              <li><a href="#industries">Facility Mgmt</a></li>
+              <li><a href="#industries">Healthcare</a></li>
+              <li><a href="#industries">Education</a></li>
+            </ul>
+          </div>
+          <div class="fcol">
+            <h5>Legal</h5>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Revv Studios. All rights reserved.</span>
+          <div class="flinks">
+            <a href="#">Sitemap</a><a href="#">Privacy</a><a href="#">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      /* Lenis smooth scroll */
+      const prefersReduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      let lenis;
+      if (!prefersReduced && window.Lenis) {
+        lenis = new Lenis({
+          duration: 1.1,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+        lenis.on("scroll", ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+          lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+      }
+
+      /* progress bar */
+      const progressBar = document.getElementById("progressBar");
+      ScrollTrigger.create({
+        start: 0,
+        end: "max",
+        onUpdate: (self) => {
+          progressBar.style.width = self.progress * 100 + "%";
+        },
+      });
+
+      /* header scroll state */
+      const header = document.getElementById("siteHeader");
+      ScrollTrigger.create({
+        start: 100,
+        end: 99999,
+        onUpdate: (self) =>
+          header.classList.toggle("scrolled", self.scroll() > 80),
+      });
+
+      /* cursor follower */
+      const cursor = document.getElementById("cursor");
+      if (!("ontouchstart" in window)) {
+        window.addEventListener("mousemove", (e) => {
+          gsap.to(cursor, {
+            x: e.clientX,
+            y: e.clientY,
+            duration: 0.15,
+            ease: "power2.out",
+          });
+        });
+        document
+          .querySelectorAll(
+            "a, button, .service-card, .video-card, .project-card",
+          )
+          .forEach((el) => {
+            el.addEventListener("mouseenter", () =>
+              cursor.classList.add("grow"),
+            );
+            el.addEventListener("mouseleave", () =>
+              cursor.classList.remove("grow"),
+            );
+          });
+      }
+
+      /* magnetic buttons */
+      document.querySelectorAll(".magnetic").forEach((btn) => {
+        btn.addEventListener("mousemove", (e) => {
+          const r = btn.getBoundingClientRect();
+          const x = e.clientX - r.left - r.width / 2;
+          const y = e.clientY - r.top - r.height / 2;
+          gsap.to(btn, {
+            x: x * 0.3,
+            y: y * 0.4,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+        });
+        btn.addEventListener("mouseleave", () =>
+          gsap.to(btn, {
+            x: 0,
+            y: 0,
+            duration: 0.5,
+            ease: "elastic.out(1,0.4)",
+          }),
+        );
+        btn.addEventListener("click", function (e) {
+          const ripple = document.createElement("span");
+          ripple.className = "btn-ripple";
+          const r = this.getBoundingClientRect();
+          ripple.style.left = e.clientX - r.left + "px";
+          ripple.style.top = e.clientY - r.top + "px";
+          ripple.style.width = ripple.style.height = "140px";
+          ripple.style.marginLeft = "-70px";
+          ripple.style.marginTop = "-70px";
+          this.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 650);
+        });
+      });
+
+      /* mobile menu */
+      const burger = document.getElementById("burger");
+      const mobileMenu = document.getElementById("mobileMenu");
+      burger.addEventListener("click", () => {
+        mobileMenu.classList.toggle("open");
+        burger.classList.toggle("active");
+      });
+      mobileMenu
+        .querySelectorAll("a")
+        .forEach((a) =>
+          a.addEventListener("click", () =>
+            mobileMenu.classList.remove("open"),
+          ),
+        );
+
+      /* hero text reveal */
+      gsap.to(".hero h1 .line span", {
+        y: "0%",
+        duration: 1.1,
+        stagger: 0.12,
+        ease: "power4.out",
+        delay: 0.3,
+      });
+      gsap.from(".hero .eyebrow, .hero-sub, .hero-buttons, .hero-stats", {
+        opacity: 0,
+        y: 24,
+        duration: 1,
+        stagger: 0.12,
+        delay: 0.9,
+        ease: "power3.out",
+      });
+
+      /* animated counters */
+      function animateCounter(el) {
+        const target = parseFloat(el.dataset.count);
+        const suffix = el.dataset.suffix || "";
+        const isDecimal = target % 1 !== 0;
+        const obj = { val: 0 };
+        gsap.to(obj, {
+          val: target,
+          duration: 2,
+          ease: "power2.out",
+          onUpdate: () => {
+            el.textContent =
+              (isDecimal ? obj.val.toFixed(1) : Math.round(obj.val)) + suffix;
+          },
+          scrollTrigger: { trigger: el, start: "top 85%", once: true },
+        });
+      }
+      document.querySelectorAll("[data-count]").forEach(animateCounter);
+
+      /* generic reveal on scroll */
+      gsap.utils.toArray(".reveal").forEach((el) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: { trigger: el, start: "top 88%" },
+          },
+        );
+      });
+
+      /* about pulse rings */
+      gsap.to(".pulse-ring", {
+        scale: 1.15,
+        opacity: 0.4,
+        duration: 2.4,
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true,
+        stagger: 0.3,
+      });
+      gsap.to(".core", {
+        scale: 1.15,
+        duration: 1.6,
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true,
+      });
+
+      /* section head reveal */
+      gsap.utils.toArray(".section-head").forEach((el) => {
+        gsap.fromTo(
+          el.children,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.12,
+            ease: "power3.out",
+            scrollTrigger: { trigger: el, start: "top 85%" },
+          },
+        );
+      });
+
+      /* services tabs */
+      document.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".tab-btn")
+            .forEach((b) => b.classList.remove("active"));
+          document
+            .querySelectorAll(".service-panel")
+            .forEach((p) => p.classList.remove("active"));
+          btn.classList.add("active");
+          document
+            .querySelector(
+              '.service-panel[data-panel="' + btn.dataset.tab + '"]',
+            )
+            .classList.add("active");
+          ScrollTrigger.refresh();
+        });
+      });
+
+      /* FAQ accordion */
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        const a = item.querySelector(".faq-a");
+        if (item.classList.contains("open")) {
+          a.style.maxHeight = a.scrollHeight + "px";
+        }
+        item.querySelector(".faq-q").addEventListener("click", () => {
+          const isOpen = item.classList.contains("open");
+          document.querySelectorAll(".faq-item").forEach((i) => {
+            i.classList.remove("open");
+            i.querySelector(".faq-a").style.maxHeight = 0;
+          });
+          if (!isOpen) {
+            item.classList.add("open");
+            a.style.maxHeight = a.scrollHeight + "px";
+          }
+        });
+      });
+
+      /* horizontal pinned projects */
+      function initProjectsPin() {
+        const track = document.getElementById("projectsTrack");
+        const pin = document.getElementById("projectsPin");
+        if (!track || window.innerWidth < 700) return;
+        const getDistance = () => track.scrollWidth - window.innerWidth + 96;
+        let tween = gsap.to(track, {
+          x: () => -getDistance(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: pin,
+            start: "top top",
+            end: () => "+=" + (getDistance() + window.innerHeight * 0.6),
+            scrub: 1,
+            pin: true,
+            invalidateOnRefresh: true,
+          },
+        });
+      }
+      initProjectsPin();
+
+      /* card stacking parallax on process numbers */
+      gsap.utils.toArray(".process-item").forEach((item, i) => {
+        gsap.fromTo(
+          item,
+          { opacity: 0, x: -30 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            scrollTrigger: { trigger: item, start: "top 90%" },
+          },
+        );
+      });
+
+      /* results band count text color already accent via CSS */
+
+      /* mouse parallax on hero grid */
+      window.addEventListener("mousemove", (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 20;
+        const y = (e.clientY / window.innerHeight - 0.5) * 20;
+        gsap.to(".hero-grid", { x: x, y: y, duration: 1, ease: "power2.out" });
+      });
+
+      /* refresh after fonts load */
+      window.addEventListener("load", () => ScrollTrigger.refresh());
+
+      /* =====================================================================
+   CINEMATIC DYNAMIC SCROLL BACKGROUND SYSTEM — Background Manager
+   ---------------------------------------------------------------------
+   Every section below is wired to one entry in `backgroundMedia`.
+   To swap in your own AI-generated assets later, only edit this object —
+   no HTML/CSS/JS restructuring required.
+
+   Supported cfg.type values: 'canvas' | 'gradient' | 'video' | 'webm' | 'gif' | 'lottie' | 'three'
+   - canvas / gradient  -> render live right now (zero external dependencies, always reliable)
+   - video / webm       -> set cfg.src to an .mp4/.webm URL, lazy-loads + autoplays muted when in view
+   - gif                -> set cfg.src to a .gif URL, lazy-loads
+   - lottie             -> set cfg.src to a Lottie .json URL (lottie-web is pulled in on demand)
+   - three              -> renders a lightweight rotating Three.js scene (three.js pulled in on demand)
+
+   Example swap:
+     hero: { type:'video', src:'https://your-cdn.com/hero-ai-render.mp4', tint:'dark' }
+   ===================================================================== */
+
+      const backgroundMedia = {
+        // Hero → cinematic AI technology motion, no readability wash — video/scene shows fully transparent
+        trusted: { type: "gradient", variant: "soft", tint: "dark" }, // Trusted By → soft animated gradient
+        about: { type: "canvas", variant: "particles", tint: "dark" }, // About → flowing abstract particles
+        services: { type: "canvas", variant: "grid", tint: "dark" }, // Services → technology animation
+        aiShowcase: { type: "canvas", variant: "nodes", tint: "dark" }, // AI Showcase → futuristic AI animation
+        projectsPin: { type: "canvas", variant: "network", tint: "dark" }, // Projects → digital network animation
+        industries: { type: "canvas", variant: "network", tint: "dark" }, // Industries → corporate world animation
+        process: { type: "canvas", variant: "lines", tint: "dark" }, // Process → flowing connection lines
+        tech: { type: "gradient", variant: "soft", tint: "dark" },
+        results: { type: "canvas", variant: "databars", tint: "dark" }, // Results → animated data visualization
+        testimonials: { type: "canvas", variant: "waves", tint: "dark" }, // Testimonials → soft moving light waves
+        pricing: { type: "gradient", variant: "premium", tint: "dark" }, // Pricing → premium gradient animation
+        faq: { type: "gradient", variant: "soft", tint: "dark" },
+        blog: { type: "gradient", variant: "minimal", tint: "dark" }, // Blog → minimal animated background
+        contact: { type: "canvas", variant: "particles", tint: "dark" }, // Contact → elegant corporate abstract animation
+        footer: { type: "gradient", variant: "subtle", tint: "dark" }, // Footer → subtle looping gradient
+      };
+
+      /* Lightweight canvas scene engine — one class, several drawing modes,
+   so every 'canvas' entry above shares a single tiny rAF-driven renderer. */
+      class CineCanvas {
+        constructor(canvas, mode, tint) {
+          this.canvas = canvas;
+          this.ctx = canvas.getContext("2d");
+          this.mode = mode;
+          this.tint = tint;
+          this.running = false;
+          this.t = 0;
+          this.resize = this.resize.bind(this);
+          this.loop = this.loop.bind(this);
+          this.resize();
+          window.addEventListener("resize", this.resize);
+          this.seed();
+        }
+        resize() {
+          const r = this.canvas.getBoundingClientRect();
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          this.canvas.width = Math.max(1, r.width * dpr);
+          this.canvas.height = Math.max(1, r.height * dpr);
+          this.w = this.canvas.width;
+          this.h = this.canvas.height;
+        }
+        seed() {
+          const counts = {
+            particles: 44,
+            network: 32,
+            nodes: 28,
+            lines: 0,
+            waves: 0,
+            databars: 7,
+            orbit: 0,
+            grid: 0,
+          };
+          const n = counts[this.mode] ?? 30;
+          this.pts = Array.from({ length: n }, () => ({
+            x: Math.random() * this.w,
+            y: Math.random() * this.h,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: (Math.random() - 0.5) * 0.35,
+            r: Math.random() * 1.6 + 1,
+          }));
+        }
+        c1(a) {
+          return this.tint === "dark"
+            ? `rgba(148,163,184,${a})`
+            : `rgba(37,99,235,${a})`;
+        }
+        c2(a) {
+          return `rgba(20,184,166,${a})`;
+        }
+        draw() {
+          const ctx = this.ctx,
+            w = this.w,
+            h = this.h;
+          ctx.clearRect(0, 0, w, h);
+          if (
+            this.mode === "particles" ||
+            this.mode === "network" ||
+            this.mode === "nodes"
+          ) {
+            this.pts.forEach((p) => {
+              p.x += p.vx;
+              p.y += p.vy;
+              if (p.x < 0 || p.x > w) p.vx *= -1;
+              if (p.y < 0 || p.y > h) p.vy *= -1;
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.r * 2, 0, Math.PI * 2);
+              ctx.fillStyle = this.c1(0.55);
+              ctx.fill();
+            });
+            const maxD = w * 0.13;
+            for (let i = 0; i < this.pts.length; i++) {
+              for (let j = i + 1; j < this.pts.length; j++) {
+                const a = this.pts[i],
+                  b = this.pts[j];
+                const d = Math.hypot(a.x - b.x, a.y - b.y);
+                if (d < maxD) {
+                  ctx.beginPath();
+                  ctx.moveTo(a.x, a.y);
+                  ctx.lineTo(b.x, b.y);
+                  ctx.strokeStyle = this.c1((1 - d / maxD) * 0.28);
+                  ctx.lineWidth = 1;
+                  ctx.stroke();
+                }
+              }
+            }
+          } else if (this.mode === "orbit") {
+            this.t += 0.0025;
+            const cx = w / 2,
+              cy = h * 0.42;
+            [0.16, 0.26, 0.36].forEach((rf, i) => {
+              const r = Math.min(w, h) * rf;
+              ctx.beginPath();
+              ctx.arc(cx, cy, r, 0, Math.PI * 2);
+              ctx.strokeStyle = this.c1(0.13);
+              ctx.lineWidth = 1;
+              ctx.stroke();
+              const ang = this.t * (i % 2 ? 1 : -1) * (1 + i * 0.4);
+              const x = cx + Math.cos(ang) * r,
+                y = cy + Math.sin(ang) * r * 0.5;
+              ctx.beginPath();
+              ctx.arc(x, y, 4, 0, Math.PI * 2);
+              ctx.fillStyle = this.c2(0.8);
+              ctx.fill();
+            });
+          } else if (this.mode === "grid") {
+            this.t += 0.01;
+            const step = Math.max(46, w * 0.045);
+            for (let x = 0; x < w; x += step) {
+              for (let y = 0; y < h; y += step) {
+                const wave = Math.sin((x + y) * 0.01 + this.t) * 0.5 + 0.5;
+                ctx.fillStyle = this.c1(wave * 0.14);
+                ctx.fillRect(x, y, 2.4, 2.4);
+              }
+            }
+          } else if (this.mode === "lines") {
+            this.t += 0.006;
+            for (let i = 0; i < 5; i++) {
+              ctx.beginPath();
+              for (let x = 0; x <= w; x += w / 40) {
+                const y =
+                  h * (0.2 + i * 0.15) +
+                  Math.sin(x * 0.006 + this.t + i) * h * 0.05;
+                x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+              }
+              ctx.strokeStyle = i % 2 ? this.c2(0.22) : this.c1(0.18);
+              ctx.lineWidth = 1.5;
+              ctx.stroke();
+            }
+          } else if (this.mode === "waves") {
+            this.t += 0.004;
+            for (let i = 0; i < 4; i++) {
+              ctx.beginPath();
+              for (let x = 0; x <= w; x += w / 60) {
+                const y =
+                  h * 0.5 +
+                  Math.sin(x * 0.004 + this.t * (1 + i * 0.3) + i) *
+                    h *
+                    0.06 *
+                    (i + 1);
+                x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+              }
+              ctx.strokeStyle = this.c1(0.09 + i * 0.03);
+              ctx.lineWidth = 2;
+              ctx.stroke();
+            }
+          } else if (this.mode === "databars") {
+            this.t += 0.02;
+            const n = this.pts.length,
+              bw = w / n;
+            this.pts.forEach((p, i) => {
+              const bh =
+                (Math.sin(this.t + i) * 0.5 + 0.5) * h * 0.5 + h * 0.08;
+              const grad = ctx.createLinearGradient(0, h, 0, h - bh);
+              grad.addColorStop(0, this.c2(0.5));
+              grad.addColorStop(1, this.c1(0.05));
+              ctx.fillStyle = grad;
+              ctx.fillRect(i * bw + bw * 0.2, h - bh, bw * 0.6, bh);
+            });
+          }
+        }
+        loop() {
+          if (!this.running) return;
+          this.draw();
+          requestAnimationFrame(this.loop);
+        }
+        start() {
+          if (this.running) return;
+          this.running = true;
+          this.loop();
+        }
+        stop() {
+          this.running = false;
+        }
+      }
+
+      /* On-demand loaders so Lottie/Three.js are only fetched if actually used */
+      function cineLoadLottie(container, src) {
+        if (!src) return;
+        const s = document.createElement("script");
+        s.src =
+          "https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js";
+        s.onload = () => {
+          if (window.lottie)
+            window.lottie.loadAnimation({
+              container,
+              renderer: "svg",
+              loop: true,
+              autoplay: true,
+              path: src,
+            });
+        };
+        document.head.appendChild(s);
+      }
+      function cineLoadThree(canvas) {
+        const s = document.createElement("script");
+        s.src =
+          "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+        s.onload = () => {
+          const renderer = new THREE.WebGLRenderer({
+            canvas,
+            alpha: true,
+            antialias: true,
+          });
+          const scene = new THREE.Scene();
+          const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 1000);
+          camera.position.z = 5;
+          const geo = new THREE.SphereGeometry(1.6, 24, 24);
+          const mat = new THREE.MeshBasicMaterial({
+            color: 0x2563eb,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.5,
+          });
+          const mesh = new THREE.Mesh(geo, mat);
+          scene.add(mesh);
+          function resize() {
+            const r = canvas.getBoundingClientRect();
+            renderer.setSize(r.width, r.height, false);
+            camera.aspect = r.width / Math.max(r.height, 1);
+            camera.updateProjectionMatrix();
+          }
+          resize();
+          window.addEventListener("resize", resize);
+          (function animate() {
+            mesh.rotation.y += 0.002;
+            mesh.rotation.x += 0.001;
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+          })();
+        };
+        document.head.appendChild(s);
+      }
+
+      function buildCineLayer(id, cfg) {
+        const host = document.getElementById(id);
+        if (!host) return;
+
+        const layer = document.createElement("div");
+        layer.className = "cine-bg";
+        layer.dataset.tint = cfg.tint;
+
+        let media, io;
+
+        if (cfg.type === "canvas") {
+          media = document.createElement("canvas");
+          layer.appendChild(media);
+        } else if (cfg.type === "gradient") {
+          media = document.createElement("div");
+          media.className = "cine-gradient cine-gradient--" + cfg.variant;
+          layer.appendChild(media);
+        } else if (cfg.type === "video" || cfg.type === "webm") {
+          media = document.createElement("video");
+          media.muted = true;
+          media.loop = true;
+          media.playsInline = true;
+          media.preload = "none";
+          if (cfg.poster) media.poster = cfg.poster;
+          media.dataset.src = cfg.src || "";
+          layer.appendChild(media);
+        } else if (cfg.type === "gif") {
+          media = document.createElement("img");
+          media.loading = "lazy";
+          media.alt = "";
+          media.dataset.src = cfg.src || "";
+          layer.appendChild(media);
+        } else if (cfg.type === "lottie") {
+          media = document.createElement("div");
+          media.className = "cine-lottie";
+          layer.appendChild(media);
+          cineLoadLottie(media, cfg.src);
+        } else if (cfg.type === "three") {
+          media = document.createElement("canvas");
+          layer.appendChild(media);
+          cineLoadThree(media);
+        }
+
+        if (
+          ["canvas", "video", "webm", "gif"].includes(cfg.type) &&
+          cfg.overlay !== false
+        ) {
+          const overlay = document.createElement("div");
+          overlay.className =
+            cfg.tint === "dark" ? "cine-overlay-dark" : "cine-overlay-light";
+          layer.appendChild(overlay);
+        }
+
+        // insertion point — first child, so it always paints behind existing content
+        // (each section is already position:relative; content wrappers are position:relative
+        // too, so normal DOM order keeps the new layer strictly beneath everything else)
+        if (id === "hero") {
+          const anchor = document.querySelector(".hero-content");
+          anchor
+            ? anchor.before(layer)
+            : host.insertBefore(layer, host.firstChild);
+        } else {
+          host.insertBefore(layer, host.firstChild);
+        }
+
+        const prefersReduced = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        if (cfg.type === "canvas") {
+          const engine = new CineCanvas(media, cfg.variant, cfg.tint);
+          if (prefersReduced) {
+            engine.draw();
+          } else {
+            io = new IntersectionObserver(
+              ([entry]) => {
+                entry.isIntersecting ? engine.start() : engine.stop();
+              },
+              { threshold: 0.05 },
+            );
+            io.observe(host);
+          }
+        }
+
+        if (cfg.type === "video" || cfg.type === "webm") {
+          io = new IntersectionObserver(
+            ([entry]) => {
+              if (entry.isIntersecting) {
+                if (!media.getAttribute("src") && media.dataset.src)
+                  media.src = media.dataset.src;
+                if (!prefersReduced) media.play().catch(() => {});
+              } else {
+                media.pause();
+              }
+            },
+            { threshold: 0.15 },
+          );
+          io.observe(host);
+        }
+
+        if (cfg.type === "gif") {
+          io = new IntersectionObserver(
+            ([entry]) => {
+              if (
+                entry.isIntersecting &&
+                !media.getAttribute("src") &&
+                media.dataset.src
+              ) {
+                media.src = media.dataset.src;
+              }
+            },
+            { threshold: 0.1 },
+          );
+          io.observe(host);
+        }
+
+        // cinematic reveal: crossfade + slow zoom + blur-out, toggles both ways
+        ScrollTrigger.create({
+          trigger: host,
+          start: "top 78%",
+          end: "bottom 20%",
+          toggleClass: { targets: layer, className: "in" },
+        });
+
+        // gentle parallax drift for depth while scrolling through the section
+        if (!prefersReduced) {
+          gsap.to(layer, {
+            yPercent: -10,
+            ease: "none",
+            scrollTrigger: {
+              trigger: host,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+        }
+      }
+
+      Object.entries(backgroundMedia).forEach(([id, cfg]) =>
+        buildCineLayer(id, cfg),
+      );
+      ScrollTrigger.refresh();
+
+      /* AI Video Showcase — carousel controller */
+      (function initVideoCarousel() {
+        const track = document.getElementById("videoCarouselTrack");
+        if (!track) return;
+        const prevBtn = document.getElementById("vcPrev");
+        const nextBtn = document.getElementById("vcNext");
+        const dotsWrap = document.getElementById("vcDots");
+        const cards = Array.from(track.children);
+
+        cards.forEach((_, i) => {
+          const dot = document.createElement("button");
+          dot.className = "vc-dot" + (i === 0 ? " active" : "");
+          dot.setAttribute("aria-label", "Go to video " + (i + 1));
+          dot.addEventListener("click", () => scrollToCard(i));
+          dotsWrap.appendChild(dot);
+        });
+        const dots = Array.from(dotsWrap.children);
+
+        function cardStep() {
+          const style = getComputedStyle(track);
+          return (
+            cards[0].getBoundingClientRect().width + parseFloat(style.gap || 20)
+          );
+        }
+        function scrollToCard(i) {
+          track.scrollTo({ left: i * cardStep(), behavior: "smooth" });
+        }
+        function updateActiveDot() {
+          const idx = Math.round(track.scrollLeft / cardStep());
+          dots.forEach((d, i) => d.classList.toggle("active", i === idx));
+        }
+        let scrollDebounce;
+        track.addEventListener("scroll", () => {
+          clearTimeout(scrollDebounce);
+          scrollDebounce = setTimeout(updateActiveDot, 90);
+        });
+
+        prevBtn.addEventListener("click", () => {
+          track.scrollBy({ left: -cardStep(), behavior: "smooth" });
+        });
+        nextBtn.addEventListener("click", () => {
+          track.scrollBy({ left: cardStep(), behavior: "smooth" });
+        });
+
+        // click-and-drag scrolling on desktop
+        let isDown = false,
+          startX = 0,
+          startScroll = 0;
+        track.addEventListener("mousedown", (e) => {
+          isDown = true;
+          startX = e.pageX;
+          startScroll = track.scrollLeft;
+        });
+        window.addEventListener("mouseup", () => (isDown = false));
+        window.addEventListener("mousemove", (e) => {
+          if (!isDown) return;
+          track.scrollLeft = startScroll - (e.pageX - startX);
+        });
+
+        // autoplay, paused on hover / touch / manual interaction
+        function advance() {
+          const max = track.scrollWidth - track.clientWidth - 4;
+          if (track.scrollLeft >= max) {
+            track.scrollTo({ left: 0, behavior: "smooth" });
+          } else {
+            track.scrollBy({ left: cardStep(), behavior: "smooth" });
+          }
+        }
+        let autoTimer = setInterval(advance, 4200);
+        function pauseAuto() {
+          clearInterval(autoTimer);
+        }
+        function resumeAuto() {
+          clearInterval(autoTimer);
+          autoTimer = setInterval(advance, 4200);
+        }
+        track.addEventListener("mouseenter", pauseAuto);
+        track.addEventListener("mouseleave", resumeAuto);
+        track.addEventListener("touchstart", pauseAuto, { passive: true });
+        track.addEventListener("touchend", resumeAuto);
+        prevBtn.addEventListener("click", resumeAuto);
+        nextBtn.addEventListener("click", resumeAuto);
+      })();
+      const video = document.getElementById("bg-video");
+
+      // Ensure autoplay works
+      video.addEventListener("loadeddata", () => {
+        video.play().catch(() => {
+          // If autoplay is blocked, user interaction will start it
+          console.log("Autoplay blocked – waiting for user interaction.");
+        });
+      });
+
+      // Fallback if video fails to load
+      video.addEventListener("error", () => {
+        console.warn("Video failed to load.");
+      });
+    </script>
+  </body>
+</html>
