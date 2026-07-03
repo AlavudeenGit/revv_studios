@@ -1852,3 +1852,94 @@ footer {
     transform: none;
   }
 }
+/* ── Video Card with Iframe ── */
+.video-card {
+  position: relative;
+  aspect-ratio: 9/16;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #1e293b;
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+}
+
+.video-card iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  z-index: 1;
+  display: none; /* hidden until play */
+}
+
+.video-card .video-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(160deg, #1e293b, #0f172a);
+}
+
+/* Optional gradient overlay for placeholder */
+.video-card .thumb-gradient {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 20%, rgba(37,99,235,0.15), transparent 60%);
+}
+
+.video-card .play-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+.video-card .play-btn:hover {
+  transform: translate(-50%, -50%) scale(1.12);
+  background: var(--primary);
+}
+
+.video-card .tag {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  z-index: 2;
+  color: #fff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+.video-card .tag span {
+  display: block;
+  color: #94a3b8;
+  font-weight: 500;
+  font-size: 0.68rem;
+  margin-top: 2px;
+}
+
+/* When playing, show iframe and hide placeholder */
+.video-card.playing iframe {
+  display: block;
+}
+.video-card.playing .video-placeholder {
+  display: none;
+}
+.video-card.playing .play-btn {
+  /* still visible to allow pause */
+  z-index: 3;
+}

@@ -296,26 +296,165 @@ const backgroundMedia = {
 // For this answer I've kept the core functionality; ensure you copy the full implementation.
 
 // ── AI Video Showcase: carousel & video play logic ──
+// (function initVideoCarousel() {
+//   const track = document.getElementById("videoCarouselTrack");
+//   if (!track) return;
+//   const prevBtn = document.getElementById("vcPrev");
+//   const nextBtn = document.getElementById("vcNext");
+//   const dotsWrap = document.getElementById("vcDots");
+
+//   const cards = Array.from(track.children);
+
+//   // Build dots
+//   cards.forEach((_, i) => {
+//     const dot = document.createElement("button");
+//     dot.className = "vc-dot" + (i === 0 ? " active" : "");
+//     dot.setAttribute("aria-label", "Go to video " + (i + 1));
+//     dot.addEventListener("click", () => scrollToCard(i));
+//     dotsWrap.appendChild(dot);
+//   });
+//   const dots = Array.from(dotsWrap.children);
+
+//   function cardStep() {
+//     const style = getComputedStyle(track);
+//     return cards[0].getBoundingClientRect().width + parseFloat(style.gap || 20);
+//   }
+
+//   function scrollToCard(i) {
+//     track.scrollTo({ left: i * cardStep(), behavior: "smooth" });
+//   }
+
+//   function updateActiveDot() {
+//     const idx = Math.round(track.scrollLeft / cardStep());
+//     dots.forEach((d, i) => d.classList.toggle("active", i === idx));
+//   }
+
+//   let scrollDebounce;
+//   track.addEventListener("scroll", () => {
+//     clearTimeout(scrollDebounce);
+//     scrollDebounce = setTimeout(updateActiveDot, 90);
+//   });
+
+//   prevBtn.addEventListener("click", () => {
+//     track.scrollBy({ left: -cardStep(), behavior: "smooth" });
+//   });
+//   nextBtn.addEventListener("click", () => {
+//     track.scrollBy({ left: cardStep(), behavior: "smooth" });
+//   });
+
+//   // Drag to scroll
+//   let isDown = false,
+//     startX = 0,
+//     startScroll = 0;
+//   track.addEventListener("mousedown", (e) => {
+//     isDown = true;
+//     startX = e.pageX;
+//     startScroll = track.scrollLeft;
+//   });
+//   window.addEventListener("mouseup", () => (isDown = false));
+//   window.addEventListener("mousemove", (e) => {
+//     if (!isDown) return;
+//     track.scrollLeft = startScroll - (e.pageX - startX);
+//   });
+
+//   // Autoplay carousel
+//   function advance() {
+//     const max = track.scrollWidth - track.clientWidth - 4;
+//     if (track.scrollLeft >= max) {
+//       track.scrollTo({ left: 0, behavior: "smooth" });
+//     } else {
+//       track.scrollBy({ left: cardStep(), behavior: "smooth" });
+//     }
+//   }
+//   let autoTimer = setInterval(advance, 4200);
+//   function pauseAuto() {
+//     clearInterval(autoTimer);
+//   }
+//   function resumeAuto() {
+//     clearInterval(autoTimer);
+//     autoTimer = setInterval(advance, 4200);
+//   }
+//   track.addEventListener("mouseenter", pauseAuto);
+//   track.addEventListener("mouseleave", resumeAuto);
+//   track.addEventListener("touchstart", pauseAuto, { passive: true });
+//   track.addEventListener("touchend", resumeAuto);
+//   prevBtn.addEventListener("click", resumeAuto);
+//   nextBtn.addEventListener("click", resumeAuto);
+
+//   // ── PLAY/PAUSE (NO src manipulation) ──
+//   let currentlyPlaying = null;
+
+//   cards.forEach((card) => {
+//     const video = card.querySelector("video");
+//     const btn = card.querySelector(".play-btn");
+//     if (!video || !btn) return;
+
+//     // Ensure no controls are shown
+//     video.removeAttribute("controls");
+
+//     btn.addEventListener("click", (e) => {
+//       e.stopPropagation();
+
+//       // If this video is already playing, pause it
+//       if (currentlyPlaying === video) {
+//         if (video.paused) {
+//           video.play().catch(() => {});
+//           btn.textContent = "⏸";
+//         } else {
+//           video.pause();
+//           btn.textContent = "▶";
+//         }
+//         return;
+//       }
+
+//       // Pause any other video
+//       if (currentlyPlaying) {
+//         currentlyPlaying.pause();
+//         const oldBtn = currentlyPlaying
+//           .closest(".video-card")
+//           .querySelector(".play-btn");
+//         if (oldBtn) oldBtn.textContent = "▶";
+//       }
+
+//       // Play this video (source already exists in HTML)
+//       video
+//         .play()
+//         .then(() => {
+//           btn.textContent = "⏸";
+//           currentlyPlaying = video;
+//         })
+//         .catch((err) => {
+//           console.warn("Play failed:", err);
+//           btn.textContent = "▶";
+//         });
+//     });
+
+//     // Reset button when video ends
+//     video.addEventListener("ended", () => {
+//       btn.textContent = "▶";
+//       if (currentlyPlaying === video) currentlyPlaying = null;
+//     });
+
+//     // Sync button state on pause/play
+//     video.addEventListener("pause", () => {
+//       btn.textContent = "▶";
+//     });
+
+//     video.addEventListener("play", () => {
+//       btn.textContent = "⏸";
+//     });
+//   });
+// })();
 (function initVideoCarousel() {
   const track = document.getElementById("videoCarouselTrack");
   if (!track) return;
   const prevBtn = document.getElementById("vcPrev");
   const nextBtn = document.getElementById("vcNext");
   const dotsWrap = document.getElementById("vcDots");
+
   const cards = Array.from(track.children);
 
-  // ── MAP FILE IDs ──
-  const fileIds = {
-    "1s8DO3NEnl0rUfvpDB_0EuzEfiQ9gO0K_": "1s8DO3NEnl0rUfvpDB_0EuzEfiQ9gO0K_",
-    "1KBQVL_Q21EtF2MpMf1xcM86xMNj444cz": "1KBQVL_Q21EtF2MpMf1xcM86xMNj444cz",
-    "1FSc0BUMyUhfMVmGncvI77o73lEsho1JR": "1FSc0BUMyUhfMVmGncvI77o73lEsho1JR",
-    "1sjxa2gqGjN_PA11x4Feskwo6bTpGttMk": "1sjxa2gqGjN_PA11x4Feskwo6bTpGttMk",
-    "1PNH1OaxdVwPTO-nC3trLSJ7YLsrR0ib_": "1PNH1OaxdVwPTO-nC3trLSJ7YLsrR0ib_",
-    "18XHHn5q6TAwmWyWThErdJkL7Znwx9jYm": "18XHHn5q6TAwmWyWThErdJkL7Znwx9jYm",
-    "1YSYjzhXelpvY9CUyEH_a1x9ITwLUY2OK": "1YSYjzhXelpvY9CUyEH_a1x9ITwLUY2OK"
-  };
-
-  // Build dots (unchanged)
+  // Build dots
   cards.forEach((_, i) => {
     const dot = document.createElement("button");
     dot.className = "vc-dot" + (i === 0 ? " active" : "");
@@ -329,13 +468,16 @@ const backgroundMedia = {
     const style = getComputedStyle(track);
     return cards[0].getBoundingClientRect().width + parseFloat(style.gap || 20);
   }
+
   function scrollToCard(i) {
     track.scrollTo({ left: i * cardStep(), behavior: "smooth" });
   }
+
   function updateActiveDot() {
     const idx = Math.round(track.scrollLeft / cardStep());
     dots.forEach((d, i) => d.classList.toggle("active", i === idx));
   }
+
   let scrollDebounce;
   track.addEventListener("scroll", () => {
     clearTimeout(scrollDebounce);
@@ -350,7 +492,9 @@ const backgroundMedia = {
   });
 
   // Drag
-  let isDown = false, startX = 0, startScroll = 0;
+  let isDown = false,
+    startX = 0,
+    startScroll = 0;
   track.addEventListener("mousedown", (e) => {
     isDown = true;
     startX = e.pageX;
@@ -372,7 +516,9 @@ const backgroundMedia = {
     }
   }
   let autoTimer = setInterval(advance, 4200);
-  function pauseAuto() { clearInterval(autoTimer); }
+  function pauseAuto() {
+    clearInterval(autoTimer);
+  }
   function resumeAuto() {
     clearInterval(autoTimer);
     autoTimer = setInterval(advance, 4200);
@@ -384,63 +530,45 @@ const backgroundMedia = {
   prevBtn.addEventListener("click", resumeAuto);
   nextBtn.addEventListener("click", resumeAuto);
 
-  // ── IFRAME PLAYER (works 100% with Google Drive) ──
+  // ── PLAY/PAUSE USING IFRAME ──
   let currentlyPlaying = null;
 
   cards.forEach((card) => {
+    const iframe = card.querySelector("iframe");
     const btn = card.querySelector(".play-btn");
-    const video = card.querySelector("video");
-    const tag = card.querySelector(".tag");
-    if (!btn) return;
-
-    // Hide the video element (we'll use iframe instead)
-    if (video) video.style.display = "none";
-
-    // Create iframe
-    const iframe = document.createElement("iframe");
-    iframe.style.cssText = `
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      border: none; display: none; z-index: 5;
-    `;
-    iframe.setAttribute("allowfullscreen", "");
-    iframe.setAttribute("allow", "autoplay; encrypted-media; fullscreen");
-    card.appendChild(iframe);
+    if (!iframe || !btn) return;
 
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
 
-      // If iframe is visible, hide it and reset to preview
-      if (iframe.style.display === "block") {
-        iframe.style.display = "none";
+      // If this card is already playing, pause it (hide iframe)
+      if (card.classList.contains("playing")) {
+        card.classList.remove("playing");
         btn.textContent = "▶";
-        // Show the tag again
-        if (tag) tag.style.display = "block";
+        if (currentlyPlaying === card) currentlyPlaying = null;
         return;
       }
 
-      // Hide any other playing iframe
+      // Pause any other
       if (currentlyPlaying) {
-        currentlyPlaying.style.display = "none";
-        const oldBtn = currentlyPlaying.closest(".video-card").querySelector(".play-btn");
+        currentlyPlaying.classList.remove("playing");
+        const oldBtn = currentlyPlaying.querySelector(".play-btn");
         if (oldBtn) oldBtn.textContent = "▶";
-        const oldTag = currentlyPlaying.closest(".video-card").querySelector(".tag");
-        if (oldTag) oldTag.style.display = "block";
       }
 
-      // Show this iframe
-      const fileId = card.dataset.fileId;
-      const realFileId = fileIds[fileId];
-      if (realFileId) {
-        iframe.src = `https://drive.google.com/file/d/${realFileId}/preview`;
-        iframe.style.display = "block";
-        btn.textContent = "⏸";
-        if (tag) tag.style.display = "none";
-        currentlyPlaying = iframe;
-      }
+      // Play this one
+      card.classList.add("playing");
+      btn.textContent = "⏸";
+      currentlyPlaying = card;
+
+      // Reload iframe to start from beginning (optional)
+      // Remove this if you want to resume from where left off
+      // iframe.src = iframe.src;
     });
+
+    // Optional: when iframe is clicked, it might pause; we could sync but not necessary
   });
 })();
-
 // ── Background video autoplay handling ──
 const bgVideo = document.getElementById("bg-video");
 if (bgVideo) {
