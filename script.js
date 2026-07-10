@@ -89,6 +89,36 @@ document.querySelectorAll(".magnetic").forEach((btn) => {
   });
 });
 
+/* 3D tilt on cards — desktop pointer only, GPU accelerated */
+if (!("ontouchstart" in window) && !prefersReduced) {
+  document
+    .querySelectorAll(".service-card, .project-card, .price-card")
+    .forEach((card) => {
+      card.style.transformStyle = "preserve-3d";
+      card.style.willChange = "transform";
+      card.addEventListener("mousemove", (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        gsap.to(card, {
+          rotateX: py * -6,
+          rotateY: px * 8,
+          duration: 0.5,
+          ease: "power2.out",
+          transformPerspective: 800,
+        });
+      });
+      card.addEventListener("mouseleave", () => {
+        gsap.to(card, {
+          rotateX: 0,
+          rotateY: 0,
+          duration: 0.6,
+          ease: "power3.out",
+        });
+      });
+    });
+}
+
 /* mobile menu */
 const burger = document.getElementById("burger");
 const mobileMenu = document.getElementById("mobileMenu");
@@ -259,192 +289,18 @@ gsap.utils.toArray(".process-item").forEach((item, i) => {
   );
 });
 
-/* mouse parallax on hero grid */
-window.addEventListener("mousemove", (e) => {
-  const x = (e.clientX / window.innerWidth - 0.5) * 20;
-  const y = (e.clientY / window.innerHeight - 0.5) * 20;
-  gsap.to(".hero-grid", { x: x, y: y, duration: 1, ease: "power2.out" });
-});
+/* subtle mouse parallax on the nebula glows (desktop only) */
+if (!("ontouchstart" in window) && !prefersReduced) {
+  window.addEventListener("mousemove", (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 26;
+    const y = (e.clientY / window.innerHeight - 0.5) * 26;
+    gsap.to("#nebulaLayer", { x, y, duration: 1.2, ease: "power2.out" });
+  });
+}
 
 /* refresh after fonts load */
 window.addEventListener("load", () => ScrollTrigger.refresh());
 
-/* ==============================================================
-         CINEMATIC DYNAMIC SCROLL BACKGROUND SYSTEM
-         (unchanged – kept as in your original code)
-         ============================================================== */
-const backgroundMedia = {
-  trusted: { type: "gradient", variant: "soft", tint: "dark" },
-  about: { type: "canvas", variant: "particles", tint: "dark" },
-  services: { type: "canvas", variant: "grid", tint: "dark" },
-  aiShowcase: { type: "canvas", variant: "nodes", tint: "dark" },
-  projectsPin: { type: "canvas", variant: "network", tint: "dark" },
-  industries: { type: "canvas", variant: "network", tint: "dark" },
-  process: { type: "canvas", variant: "lines", tint: "dark" },
-  tech: { type: "gradient", variant: "soft", tint: "dark" },
-  results: { type: "canvas", variant: "databars", tint: "dark" },
-  testimonials: { type: "canvas", variant: "waves", tint: "dark" },
-  pricing: { type: "gradient", variant: "premium", tint: "dark" },
-  faq: { type: "gradient", variant: "soft", tint: "dark" },
-  blog: { type: "gradient", variant: "minimal", tint: "dark" },
-  contact: { type: "canvas", variant: "particles", tint: "dark" },
-  footer: { type: "gradient", variant: "subtle", tint: "dark" },
-};
-
-/* (CineCanvas class, buildCineLayer, etc. remain exactly as in your code – omitted for brevity) */
-// ⚠️ In production, copy the full CineCanvas / buildCineLayer logic from your original file.
-// For this answer I've kept the core functionality; ensure you copy the full implementation.
-
-// ── AI Video Showcase: carousel & video play logic ──
-// (function initVideoCarousel() {
-//   const track = document.getElementById("videoCarouselTrack");
-//   if (!track) return;
-//   const prevBtn = document.getElementById("vcPrev");
-//   const nextBtn = document.getElementById("vcNext");
-//   const dotsWrap = document.getElementById("vcDots");
-
-//   const cards = Array.from(track.children);
-
-//   // Build dots
-//   cards.forEach((_, i) => {
-//     const dot = document.createElement("button");
-//     dot.className = "vc-dot" + (i === 0 ? " active" : "");
-//     dot.setAttribute("aria-label", "Go to video " + (i + 1));
-//     dot.addEventListener("click", () => scrollToCard(i));
-//     dotsWrap.appendChild(dot);
-//   });
-//   const dots = Array.from(dotsWrap.children);
-
-//   function cardStep() {
-//     const style = getComputedStyle(track);
-//     return cards[0].getBoundingClientRect().width + parseFloat(style.gap || 20);
-//   }
-
-//   function scrollToCard(i) {
-//     track.scrollTo({ left: i * cardStep(), behavior: "smooth" });
-//   }
-
-//   function updateActiveDot() {
-//     const idx = Math.round(track.scrollLeft / cardStep());
-//     dots.forEach((d, i) => d.classList.toggle("active", i === idx));
-//   }
-
-//   let scrollDebounce;
-//   track.addEventListener("scroll", () => {
-//     clearTimeout(scrollDebounce);
-//     scrollDebounce = setTimeout(updateActiveDot, 90);
-//   });
-
-//   prevBtn.addEventListener("click", () => {
-//     track.scrollBy({ left: -cardStep(), behavior: "smooth" });
-//   });
-//   nextBtn.addEventListener("click", () => {
-//     track.scrollBy({ left: cardStep(), behavior: "smooth" });
-//   });
-
-//   // Drag to scroll
-//   let isDown = false,
-//     startX = 0,
-//     startScroll = 0;
-//   track.addEventListener("mousedown", (e) => {
-//     isDown = true;
-//     startX = e.pageX;
-//     startScroll = track.scrollLeft;
-//   });
-//   window.addEventListener("mouseup", () => (isDown = false));
-//   window.addEventListener("mousemove", (e) => {
-//     if (!isDown) return;
-//     track.scrollLeft = startScroll - (e.pageX - startX);
-//   });
-
-//   // Autoplay carousel
-//   function advance() {
-//     const max = track.scrollWidth - track.clientWidth - 4;
-//     if (track.scrollLeft >= max) {
-//       track.scrollTo({ left: 0, behavior: "smooth" });
-//     } else {
-//       track.scrollBy({ left: cardStep(), behavior: "smooth" });
-//     }
-//   }
-//   let autoTimer = setInterval(advance, 4200);
-//   function pauseAuto() {
-//     clearInterval(autoTimer);
-//   }
-//   function resumeAuto() {
-//     clearInterval(autoTimer);
-//     autoTimer = setInterval(advance, 4200);
-//   }
-//   track.addEventListener("mouseenter", pauseAuto);
-//   track.addEventListener("mouseleave", resumeAuto);
-//   track.addEventListener("touchstart", pauseAuto, { passive: true });
-//   track.addEventListener("touchend", resumeAuto);
-//   prevBtn.addEventListener("click", resumeAuto);
-//   nextBtn.addEventListener("click", resumeAuto);
-
-//   // ── PLAY/PAUSE (NO src manipulation) ──
-//   let currentlyPlaying = null;
-
-//   cards.forEach((card) => {
-//     const video = card.querySelector("video");
-//     const btn = card.querySelector(".play-btn");
-//     if (!video || !btn) return;
-
-//     // Ensure no controls are shown
-//     video.removeAttribute("controls");
-
-//     btn.addEventListener("click", (e) => {
-//       e.stopPropagation();
-
-//       // If this video is already playing, pause it
-//       if (currentlyPlaying === video) {
-//         if (video.paused) {
-//           video.play().catch(() => {});
-//           btn.textContent = "⏸";
-//         } else {
-//           video.pause();
-//           btn.textContent = "▶";
-//         }
-//         return;
-//       }
-
-//       // Pause any other video
-//       if (currentlyPlaying) {
-//         currentlyPlaying.pause();
-//         const oldBtn = currentlyPlaying
-//           .closest(".video-card")
-//           .querySelector(".play-btn");
-//         if (oldBtn) oldBtn.textContent = "▶";
-//       }
-
-//       // Play this video (source already exists in HTML)
-//       video
-//         .play()
-//         .then(() => {
-//           btn.textContent = "⏸";
-//           currentlyPlaying = video;
-//         })
-//         .catch((err) => {
-//           console.warn("Play failed:", err);
-//           btn.textContent = "▶";
-//         });
-//     });
-
-//     // Reset button when video ends
-//     video.addEventListener("ended", () => {
-//       btn.textContent = "▶";
-//       if (currentlyPlaying === video) currentlyPlaying = null;
-//     });
-
-//     // Sync button state on pause/play
-//     video.addEventListener("pause", () => {
-//       btn.textContent = "▶";
-//     });
-
-//     video.addEventListener("play", () => {
-//       btn.textContent = "⏸";
-//     });
-//   });
-// })();
 (function initVideoCarousel() {
   const track = document.getElementById("videoCarouselTrack");
   if (!track) return;
@@ -569,13 +425,201 @@ const backgroundMedia = {
     // Optional: when iframe is clicked, it might pause; we could sync but not necessary
   });
 })();
-// ── Background video autoplay handling ──
-const bgVideo = document.getElementById("bg-video");
-if (bgVideo) {
-  bgVideo.addEventListener("loadeddata", () => {
-    bgVideo.play().catch(() => console.log("Autoplay blocked."));
-  });
-  bgVideo.addEventListener("error", () =>
-    console.warn("Background video failed."),
+
+/* ==============================================================
+   GALAXY BACKGROUND — fixed starfield canvas
+   Twinkling stars + occasional shooting stars + slow parallax.
+   Replaces the old (never-completed) cinematic media system.
+   ============================================================== */
+(function initGalaxy() {
+  const canvas = document.getElementById("galaxyCanvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  let w, h, dpr;
+  let stars = [];
+  let planets = [];
+  let shootingStars = [];
+  let scrollY = 0;
+
+  function isMobile() {
+    return window.innerWidth < 700;
+  }
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + "px";
+    canvas.style.height = h + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    buildStars();
+  }
+
+  function buildStars() {
+    const count = isMobile() ? 90 : 200;
+    stars = Array.from({ length: count }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 1.3 + 0.3,
+      baseAlpha: Math.random() * 0.5 + 0.35,
+      phase: Math.random() * Math.PI * 2,
+      speed: Math.random() * 0.015 + 0.006,
+      depth: Math.random() * 0.5 + 0.15, // parallax depth
+    }));
+    buildPlanets();
+  }
+
+  /* two faint background planets — one ringed, positioned near the
+     edges so they never compete with the foreground content */
+  function buildPlanets() {
+    planets = [
+      {
+        x: w * 0.9,
+        y: h * 0.16,
+        r: isMobile() ? 30 : 52,
+        hue: "139,108,242", // violet
+        ring: true,
+        depth: 0.08,
+        driftPhase: 0,
+      },
+      {
+        x: w * 0.06,
+        y: h * 0.78,
+        r: isMobile() ? 20 : 34,
+        hue: "53,230,200", // teal
+        ring: false,
+        depth: 0.14,
+        driftPhase: Math.PI,
+      },
+    ];
+  }
+
+  function drawPlanets(time) {
+    planets.forEach((p) => {
+      const drift = prefersReduced ? 0 : Math.sin(time * 0.00006 + p.driftPhase) * 14;
+      const parallaxY = (scrollY * p.depth * 0.04) % (h + 200);
+      const px = p.x + drift;
+      const py = p.y - parallaxY;
+
+      // soft glow
+      const glow = ctx.createRadialGradient(px, py, 0, px, py, p.r * 3.2);
+      glow.addColorStop(0, `rgba(${p.hue},0.28)`);
+      glow.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(px, py, p.r * 3.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      // body
+      const body = ctx.createRadialGradient(
+        px - p.r * 0.3,
+        py - p.r * 0.3,
+        0,
+        px,
+        py,
+        p.r,
+      );
+      body.addColorStop(0, `rgba(${p.hue},0.9)`);
+      body.addColorStop(1, `rgba(${p.hue},0.15)`);
+      ctx.fillStyle = body;
+      ctx.beginPath();
+      ctx.arc(px, py, p.r, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (p.ring) {
+        ctx.save();
+        ctx.translate(px, py);
+        ctx.rotate(-0.35);
+        ctx.strokeStyle = `rgba(${p.hue},0.35)`;
+        ctx.lineWidth = Math.max(2, p.r * 0.09);
+        ctx.beginPath();
+        ctx.ellipse(0, 0, p.r * 1.9, p.r * 0.55, 0, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+      }
+    });
+  }
+
+  function maybeSpawnShootingStar() {
+    if (prefersReduced) return;
+    if (Math.random() < 0.0035 && shootingStars.length < 2) {
+      const startX = Math.random() * w * 0.7;
+      shootingStars.push({
+        x: startX,
+        y: Math.random() * h * 0.4,
+        len: Math.random() * 90 + 60,
+        speed: Math.random() * 9 + 7,
+        life: 1,
+      });
+    }
+  }
+
+  function draw(time) {
+    ctx.clearRect(0, 0, w, h);
+
+    drawPlanets(time);
+
+    // stars
+    stars.forEach((s) => {
+      const twinkle = prefersReduced
+        ? s.baseAlpha
+        : s.baseAlpha + Math.sin(time * s.speed + s.phase) * 0.3;
+      const parallaxY = (scrollY * s.depth * 0.05) % h;
+      let y = s.y - parallaxY;
+      if (y < 0) y += h;
+      if (y > h) y -= h;
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(255,255,255,${Math.max(0, Math.min(1, twinkle))})`;
+      ctx.arc(s.x, y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // shooting stars
+    shootingStars.forEach((s) => {
+      const grad = ctx.createLinearGradient(
+        s.x,
+        s.y,
+        s.x - s.len,
+        s.y - s.len * 0.4,
+      );
+      grad.addColorStop(0, `rgba(255,255,255,${s.life})`);
+      grad.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(s.x - s.len, s.y - s.len * 0.4);
+      ctx.stroke();
+      s.x += s.speed;
+      s.y += s.speed * 0.4;
+      s.life -= 0.012;
+    });
+    shootingStars = shootingStars.filter(
+      (s) => s.life > 0 && s.x < w + 100 && s.y < h + 100,
+    );
+
+    maybeSpawnShootingStar();
+
+    if (!prefersReduced) {
+      requestAnimationFrame(draw);
+    }
+  }
+
+  window.addEventListener("resize", resize);
+  window.addEventListener(
+    "scroll",
+    () => {
+      scrollY = window.scrollY;
+    },
+    { passive: true },
   );
-}
+
+  resize();
+  if (prefersReduced) {
+    draw(0); // paint a single static frame, no loop
+  } else {
+    requestAnimationFrame(draw);
+  }
+})();
