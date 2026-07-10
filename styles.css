@@ -747,49 +747,14 @@ nav {
   border-radius: 28px;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(155deg, #0b0912 0%, #171225 55%, #0b0912 100%);
+  background: #0b0912;
   box-shadow: var(--shadow-lg);
 }
-.about-visual::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 30% 20%, rgba(139, 108, 242, 0.5), transparent 55%),
-    radial-gradient(
-      circle at 75% 80%,
-      rgba(53, 230, 200, 0.45),
-      transparent 50%
-    );
-}
-.about-visual .pulse-ring {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  transform: translate(-50%, -50%);
-}
-.about-visual .pulse-ring:nth-child(2) {
-  width: 280px;
-  height: 280px;
-}
-.about-visual .pulse-ring:nth-child(3) {
-  width: 380px;
-  height: 380px;
-}
-.about-visual .core {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: #fff;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 60px rgba(255, 255, 255, 0.6);
+.about-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .about-copy .eyebrow {
   margin-bottom: 16px;
