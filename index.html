@@ -24,7 +24,7 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600&display=swap"
       rel="stylesheet"
-    />  
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.13/lenis.min.js"></script>
@@ -546,19 +546,19 @@
       </div>
     </section>
 
-    <!-- FEATURED PROJECTS (pinned horizontal) -->
+    <!-- FEATURED PROJECTS (carousel) -->
     <section id="projects">
-      <div class="wrap" style="padding-top: 110px; padding-bottom: 56px">
+      <div class="wrap" style="padding-top: 35px;">
         <div class="section-head">
           <div class="eyebrow">Featured Projects</div>
           <h2>Case studies, not portfolio filler.</h2>
           <p>
-            Scroll to move through recent work across recruitment, facility
-            management, and education.
+            Browse recent work across recruitment, facility management, and
+            education.
           </p>
         </div>
       </div>
-      <div class="projects-pin" id="projectsPin">
+      <div class="projects-carousel">
         <div class="projects-track" id="projectsTrack">
           <div class="project-card p1">
             <div class="p-bg"></div>
@@ -625,7 +625,17 @@
             </div>
           </div>
         </div>
-        <div class="pin-progress">Scroll to explore →</div>
+        <button
+          class="vc-arrow vc-prev"
+          id="pjPrev"
+          aria-label="Previous project"
+        >
+          ‹
+        </button>
+        <button class="vc-arrow vc-next" id="pjNext" aria-label="Next project">
+          ›
+        </button>
+        <div class="projects-dots" id="pjDots"></div>
       </div>
     </section>
 

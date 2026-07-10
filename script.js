@@ -253,26 +253,77 @@ document.querySelectorAll(".faq-item").forEach((item) => {
   });
 });
 
-/* horizontal pinned projects */
-function initProjectsPin() {
+/* Featured Projects — normal carousel (arrows, dots, drag) */
+(function initProjectsCarousel() {
   const track = document.getElementById("projectsTrack");
-  const pin = document.getElementById("projectsPin");
-  if (!track || window.innerWidth < 700) return;
-  const getDistance = () => track.scrollWidth - window.innerWidth + 96;
-  let tween = gsap.to(track, {
-    x: () => -getDistance(),
-    ease: "none",
-    scrollTrigger: {
-      trigger: pin,
-      start: "top top",
-      end: () => "+=" + (getDistance() + window.innerHeight * 0.6),
-      scrub: 1,
-      pin: true,
-      invalidateOnRefresh: true,
-    },
+  if (!track) return;
+  const prevBtn = document.getElementById("pjPrev");
+  const nextBtn = document.getElementById("pjNext");
+  const dotsWrap = document.getElementById("pjDots");
+  const cards = Array.from(track.children);
+
+  cards.forEach((_, i) => {
+    const dot = document.createElement("button");
+    dot.className = "vc-dot" + (i === 0 ? " active" : "");
+    dot.setAttribute("aria-label", "Go to project " + (i + 1));
+    dot.addEventListener("click", () => scrollToCard(i));
+    dotsWrap.appendChild(dot);
   });
-}
-initProjectsPin();
+  const dots = Array.from(dotsWrap.children);
+
+  function cardStep() {
+    const style = getComputedStyle(track);
+    return cards[0].getBoundingClientRect().width + parseFloat(style.gap || 28);
+  }
+  function scrollToCard(i) {
+    track.scrollTo({ left: i * cardStep(), behavior: "smooth" });
+  }
+  function updateActiveDot() {
+    const idx = Math.round(track.scrollLeft / cardStep());
+    dots.forEach((d, i) => d.classList.toggle("active", i === idx));
+  }
+  let scrollDebounce;
+  track.addEventListener("scroll", () => {
+    clearTimeout(scrollDebounce);
+    scrollDebounce = setTimeout(updateActiveDot, 90);
+  });
+
+  prevBtn.addEventListener("click", () =>
+    track.scrollBy({ left: -cardStep(), behavior: "smooth" }),
+  );
+  nextBtn.addEventListener("click", () =>
+    track.scrollBy({ left: cardStep(), behavior: "smooth" }),
+  );
+
+  // Drag to scroll (desktop)
+  let isDown = false,
+    startX = 0,
+    startScroll = 0,
+    moved = false;
+  track.addEventListener("mousedown", (e) => {
+    isDown = true;
+    moved = false;
+    startX = e.pageX;
+    startScroll = track.scrollLeft;
+  });
+  window.addEventListener("mouseup", () => (isDown = false));
+  window.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    if (Math.abs(e.pageX - startX) > 4) moved = true;
+    track.scrollLeft = startScroll - (e.pageX - startX);
+  });
+  // prevent accidental card-content clicks right after a drag
+  track.addEventListener(
+    "click",
+    (e) => {
+      if (moved) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    },
+    true,
+  );
+})();
 
 /* card stacking parallax on process numbers */
 gsap.utils.toArray(".process-item").forEach((item, i) => {
