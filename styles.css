@@ -914,7 +914,7 @@ nav {
   }
 }
 
-/* AI VIDEO SHOWCASE — updated carousel with video cards */
+/* AI VIDEO SHOWCASE — carousel with direct video embeds */
 .video-showcase {
   background: #0b0912;
   color: #fff;
@@ -961,42 +961,23 @@ nav {
   background: linear-gradient(160deg, #171225, #0b0912);
   border: 1px solid rgba(255, 255, 255, 0.08);
   cursor: pointer;
+  padding: 0;
 }
-.video-carousel-track .video-card video {
+.video-carousel-track .video-card .video-frame {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  border-radius: inherit;
+  overflow: hidden;
+  background: #000;
+}
+.video-carousel-track .video-card .video-frame iframe {
+  width: 100%;
+  height: 100%;
   display: block;
-}
-.video-carousel-track .video-card .play-btn {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(6px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  transition:
-    transform 0.3s var(--ease),
-    background 0.3s var(--ease);
-  z-index: 2;
-  color: #fff;
-  font-size: 1.4rem;
-  line-height: 1;
-  pointer-events: all;
-  cursor: pointer;
-}
-.video-carousel-track .video-card .play-btn:hover {
-  transform: translate(-50%, -50%) scale(1.12);
-  background: var(--primary);
+  border: 0;
+  background: #000;
 }
 .video-carousel-track .video-card .tag {
   position: absolute;
@@ -1009,6 +990,10 @@ nav {
   font-family: "Plus Jakarta Sans", sans-serif;
   z-index: 2;
   pointer-events: none;
+  background: rgba(5, 5, 7, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 10px 12px;
+  border-radius: 999px;
 }
 .video-carousel-track .video-card .tag span {
   display: block;
@@ -1016,23 +1001,6 @@ nav {
   font-weight: 500;
   font-size: 0.68rem;
   margin-top: 2px;
-}
-/* Hide default controls */
-.video-carousel-track .video-card video::-webkit-media-controls {
-  display: none !important;
-}
-.video-carousel-track .video-card video::-webkit-media-controls-enclosure {
-  display: none !important;
-}
-.video-carousel-track .video-card video::-webkit-media-controls-panel {
-  display: none !important;
-}
-.video-carousel-track .video-card video::-webkit-media-controls-play-button {
-  display: none !important;
-}
-/* Fallback for Firefox */
-.video-carousel-track .video-card video {
-  -moz-media-controls: none;
 }
 @media (max-width: 640px) {
   .video-carousel-track .video-card {

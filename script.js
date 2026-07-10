@@ -437,43 +437,73 @@ window.addEventListener("load", () => ScrollTrigger.refresh());
   prevBtn.addEventListener("click", resumeAuto);
   nextBtn.addEventListener("click", resumeAuto);
 
-  // ── PLAY/PAUSE USING IFRAME ──
-  let currentlyPlaying = null;
+  function toEmbedUrl(rawUrl) {
+    if (!rawUrl) return rawUrl;
+
+    try {
+      const url = new URL(rawUrl, window.location.href);
+      const host = url.hostname.replace(/^www\./, "");
+
+      if (host === "youtube.com" || host === "m.youtube.com") {
+        const videoId =
+          url.searchParams.get("v") ||
+          url.pathname.match(/\/shorts\/([A-Za-z0-9_-]+)/)?.[1];
+
+        if (videoId) {
+          const params = new URLSearchParams({
+            autoplay: "1",
+            mute: "1",
+            playsinline: "1",
+            controls: "0",
+            loop: "1",
+            playlist: videoId,
+            rel: "0",
+            modestbranding: "1",
+            showinfo: "0",
+          });
+          return `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+        }
+      }
+
+      if (host === "youtu.be") {
+        const videoId = url.pathname.replace(/^\//, "");
+        if (videoId) {
+          const params = new URLSearchParams({
+            autoplay: "1",
+            mute: "1",
+            playsinline: "1",
+            controls: "0",
+            loop: "1",
+            playlist: videoId,
+            rel: "0",
+            modestbranding: "1",
+            showinfo: "0",
+          });
+          return `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+        }
+      }
+    } catch (error) {
+      console.warn("Unable to normalize video URL", error);
+    }
+
+    return rawUrl;
+  }
 
   cards.forEach((card) => {
-    const iframe = card.querySelector("iframe");
-    const btn = card.querySelector(".play-btn");
-    if (!iframe || !btn) return;
+    const frame = card.querySelector(".video-frame");
+    if (!frame) return;
 
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
+    const iframe = document.createElement("iframe");
+    const videoUrl = frame.dataset.videoUrl;
 
-      // If this card is already playing, pause it (hide iframe)
-      if (card.classList.contains("playing")) {
-        card.classList.remove("playing");
-        btn.textContent = "▶";
-        if (currentlyPlaying === card) currentlyPlaying = null;
-        return;
-      }
-
-      // Pause any other
-      if (currentlyPlaying) {
-        currentlyPlaying.classList.remove("playing");
-        const oldBtn = currentlyPlaying.querySelector(".play-btn");
-        if (oldBtn) oldBtn.textContent = "▶";
-      }
-
-      // Play this one
-      card.classList.add("playing");
-      btn.textContent = "⏸";
-      currentlyPlaying = card;
-
-      // Reload iframe to start from beginning (optional)
-      // Remove this if you want to resume from where left off
-      // iframe.src = iframe.src;
-    });
-
-    // Optional: when iframe is clicked, it might pause; we could sync but not necessary
+    iframe.src = toEmbedUrl(videoUrl);
+    iframe.title = frame.dataset.videoTitle || "Video showcase";
+    iframe.loading = "lazy";
+    iframe.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture");
+    iframe.setAttribute("allowfullscreen", "");
+    iframe.setAttribute("playsinline", "1");
+    iframe.setAttribute("frameborder", "0");
+    frame.appendChild(iframe);
   });
 })();
 
