@@ -1074,7 +1074,7 @@ nav {
 /* ── rest of your existing styles (industries, process, etc.) unchanged ── */
 /* ... (all other sections remain exactly as before) ... */
 
-/* FEATURED PROJECTS — normal draggable/snap carousel */
+/* FEATURED PROJECTS — image-led draggable/snap carousel */
 .projects-carousel {
   position: relative;
 }
@@ -1102,43 +1102,50 @@ nav {
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow-lg);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 44px;
+  display: grid;
+  grid-template-rows: 58% 1fr;
+  padding: 0;
   color: #fff;
   scroll-snap-align: start;
+  background: #0b0912;
 }
-.project-card::after {
-  content: "";
+.project-card .project-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.project-card .project-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.project-card .project-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.72) 0%,
-    rgba(0, 0, 0, 0.15) 45%,
-    rgba(0, 0, 0, 0.05) 100%
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.22) 45%,
+    rgba(0, 0, 0, 0.1) 100%
   );
-}
-.project-card .p-bg {
-  position: absolute;
-  inset: 0;
-}
-.p1 .p-bg {
-  background: linear-gradient(150deg, #8b6cf2, #0b0912 75%);
-}
-.p2 .p-bg {
-  background: linear-gradient(150deg, #35e6c8, #0b0912 75%);
-}
-.p3 .p-bg {
-  background: linear-gradient(150deg, #ff6ec7, #0b0912 75%);
-}
-.p4 .p-bg {
-  background: linear-gradient(150deg, #6d4fd1, #35e6c8 130%);
 }
 .project-card .content {
   position: relative;
   z-index: 2;
+  padding: 32px 34px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 14px;
+  background: linear-gradient(
+    180deg,
+    rgba(11, 9, 18, 0) 0%,
+    rgba(10, 8, 18, 0.9) 100%
+  );
 }
 .project-card .tag {
   font-size: 0.72rem;
@@ -1146,12 +1153,10 @@ nav {
   text-transform: uppercase;
   color: var(--accent);
   font-weight: 600;
-  margin-bottom: 12px;
 }
 .project-card h3 {
   color: #fff;
   font-size: 1.9rem;
-  margin-bottom: 10px;
 }
 .project-card p {
   color: #e2e8f0;
@@ -1162,6 +1167,8 @@ nav {
 .project-meta {
   display: flex;
   gap: 26px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
 }
 .project-meta div span {
   display: block;
@@ -1173,7 +1180,25 @@ nav {
 }
 .project-meta div strong {
   font-family: "Manrope", sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+}
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(10px);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  transition: background 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.project-link:hover {
+  background: rgba(139, 108, 242, 0.85);
+  transform: translateY(-2px);
 }
 .projects-dots {
   display: flex;

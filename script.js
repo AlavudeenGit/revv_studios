@@ -253,6 +253,42 @@ document.querySelectorAll(".faq-item").forEach((item) => {
   });
 });
 
+function initProjectCards() {
+  document.querySelectorAll('.project-card').forEach((card) => {
+    const link = card.querySelector('.project-link');
+    const media = card.querySelector('.project-media');
+    const topic = card.dataset.projectTopic || 'Project';
+    const projectUrl = card.dataset.projectLink;
+    if (!link) return;
+
+    if (projectUrl) {
+      link.href = projectUrl;
+      link.removeAttribute('disabled');
+      if (media) {
+        media.style.cursor = 'pointer';
+        media.addEventListener('click', () => {
+          window.open(projectUrl, '_blank', 'noopener');
+        });
+      }
+    } else {
+      link.setAttribute('aria-disabled', 'true');
+      link.style.pointerEvents = 'none';
+      link.style.opacity = '0.6';
+      if (media) {
+        media.style.cursor = 'default';
+      }
+    }
+
+    if (topic.toLowerCase().includes('app')) {
+      link.textContent = 'Open Web App';
+    } else if (topic.toLowerCase().includes('website')) {
+      link.textContent = 'Visit Website';
+    } else {
+      link.textContent = 'View Project';
+    }
+  });
+}
+
 /* Featured Projects — normal carousel (arrows, dots, drag) */
 (function initProjectsCarousel() {
   const track = document.getElementById("projectsTrack");
@@ -324,6 +360,8 @@ document.querySelectorAll(".faq-item").forEach((item) => {
     true,
   );
 })();
+
+initProjectCards();
 
 /* card stacking parallax on process numbers */
 gsap.utils.toArray(".process-item").forEach((item, i) => {
