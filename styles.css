@@ -126,7 +126,11 @@ section {
   height: 46vw;
   left: -8vw;
   top: 4vh;
-  background: radial-gradient(circle, rgba(139, 108, 242, 0.55), transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(139, 108, 242, 0.55),
+    transparent 70%
+  );
   animation: nebulaDrift1 34s ease-in-out infinite alternate;
 }
 .nebula-layer span.n2 {
@@ -134,7 +138,11 @@ section {
   height: 38vw;
   right: -6vw;
   top: 30vh;
-  background: radial-gradient(circle, rgba(255, 110, 199, 0.4), transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 110, 199, 0.4),
+    transparent 70%
+  );
   animation: nebulaDrift2 40s ease-in-out infinite alternate;
 }
 .nebula-layer span.n3 {
@@ -142,20 +150,36 @@ section {
   height: 42vw;
   left: 20vw;
   bottom: -12vh;
-  background: radial-gradient(circle, rgba(53, 230, 200, 0.32), transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(53, 230, 200, 0.32),
+    transparent 70%
+  );
   animation: nebulaDrift3 46s ease-in-out infinite alternate;
 }
 @keyframes nebulaDrift1 {
-  from { transform: translate(0, 0) scale(1); }
-  to { transform: translate(6vw, 8vh) scale(1.12); }
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(6vw, 8vh) scale(1.12);
+  }
 }
 @keyframes nebulaDrift2 {
-  from { transform: translate(0, 0) scale(1); }
-  to { transform: translate(-7vw, 6vh) scale(1.08); }
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(-7vw, 6vh) scale(1.08);
+  }
 }
 @keyframes nebulaDrift3 {
-  from { transform: translate(0, 0) scale(1); }
-  to { transform: translate(5vw, -6vh) scale(1.1); }
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(5vw, -6vh) scale(1.1);
+  }
 }
 .grain-overlay {
   position: fixed;
@@ -202,8 +226,14 @@ section {
   animation: auroraShift 26s ease-in-out infinite alternate;
 }
 @keyframes auroraShift {
-  from { background-position: 0% 50%; transform: translateY(0); }
-  to { background-position: 100% 50%; transform: translateY(-3%); }
+  from {
+    background-position: 0% 50%;
+    transform: translateY(0);
+  }
+  to {
+    background-position: 100% 50%;
+    transform: translateY(-3%);
+  }
 }
 
 /* Cosmic fog — extremely faint drifting haze for depth */
@@ -213,7 +243,8 @@ section {
   z-index: -2;
   pointer-events: none;
   opacity: 0.22;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       ellipse 60% 40% at 30% 70%,
       rgba(255, 255, 255, 0.05),
       transparent 60%
@@ -226,8 +257,12 @@ section {
   animation: fogDrift 50s ease-in-out infinite alternate;
 }
 @keyframes fogDrift {
-  from { transform: translate(0, 0); }
-  to { transform: translate(3%, -2%); }
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(3%, -2%);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .aurora-layer,
@@ -330,12 +365,10 @@ nav {
   align-items: center;
   gap: 8px;
 }
-.logo .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  display: inline-block;
+.logo img {
+  height: 55px;
+  width: auto;
+  display: block;
 }
 .nav-links {
   display: flex;
@@ -424,7 +457,9 @@ nav {
 }
 .btn-primary:hover {
   background: var(--primary-dark);
-  box-shadow: var(--glow-primary), 0 6px 22px rgba(139, 108, 242, 0.4);
+  box-shadow:
+    var(--glow-primary),
+    0 6px 22px rgba(139, 108, 242, 0.4);
 }
 .btn-outline {
   background: transparent;
@@ -505,11 +540,19 @@ nav {
     transparent 360deg
   );
   animation: raysRotate 90s linear infinite;
-  mask-image: radial-gradient(ellipse 60% 70% at 50% 0%, black 30%, transparent 75%);
+  mask-image: radial-gradient(
+    ellipse 60% 70% at 50% 0%,
+    black 30%,
+    transparent 75%
+  );
 }
 @keyframes raysRotate {
-  from { transform: translateX(-50%) rotate(0deg); }
-  to { transform: translateX(-50%) rotate(360deg); }
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-rays {
@@ -1155,7 +1198,9 @@ nav {
   font-size: 0.9rem;
   font-weight: 600;
   color: #fff;
-  transition: background 0.3s var(--ease), transform 0.3s var(--ease);
+  transition:
+    background 0.3s var(--ease),
+    transform 0.3s var(--ease);
 }
 .project-link:hover {
   background: rgba(139, 108, 242, 0.85);
@@ -1166,7 +1211,7 @@ nav {
   justify-content: center;
   gap: 8px;
   margin-top: 3%;
-  margin-bottom:5%;
+  margin-bottom: 5%;
 }
 .projects-dots .vc-dot {
   width: 8px;
@@ -1176,7 +1221,9 @@ nav {
   background: var(--border-strong);
   cursor: pointer;
   padding: 0;
-  transition: background 0.3s var(--ease), transform 0.3s var(--ease);
+  transition:
+    background 0.3s var(--ease),
+    transform 0.3s var(--ease);
 }
 .projects-dots .vc-dot.active {
   background: var(--primary);
@@ -1214,8 +1261,15 @@ nav {
   animation: psGlowPulse 6s ease-in-out infinite;
 }
 @keyframes psGlowPulse {
-  0%, 100% { opacity: 0.7; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
 }
 
 /* laptop */
@@ -1226,8 +1280,13 @@ nav {
   animation: psFloat 6s ease-in-out infinite;
 }
 @keyframes psFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 .ps-laptop-screen {
   background: #0b0912;
@@ -1408,8 +1467,12 @@ nav {
   animation: psBarGrow 1s var(--ease) both;
 }
 @keyframes psBarGrow {
-  from { transform: scaleY(0); }
-  to { transform: scaleY(1); }
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
 }
 
 .ps-rows {
@@ -2323,7 +2386,7 @@ footer {
   border-radius: 18px;
   overflow: hidden;
   background: #171225;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   cursor: pointer;
 }
 
@@ -2348,7 +2411,11 @@ footer {
 .video-card .thumb-gradient {
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 30% 20%, rgba(139,108,242,0.15), transparent 60%);
+  background: radial-gradient(
+    circle at 30% 20%,
+    rgba(139, 108, 242, 0.15),
+    transparent 60%
+  );
 }
 
 .video-card .play-btn {
@@ -2359,9 +2426,9 @@ footer {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,0.25);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   color: #fff;
   font-size: 1.4rem;
   display: flex;
@@ -2369,7 +2436,9 @@ footer {
   justify-content: center;
   z-index: 2;
   cursor: pointer;
-  transition: transform 0.3s, background 0.3s;
+  transition:
+    transform 0.3s,
+    background 0.3s;
 }
 .video-card .play-btn:hover {
   transform: translate(-50%, -50%) scale(1.12);
