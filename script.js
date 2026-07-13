@@ -119,6 +119,45 @@ if (!("ontouchstart" in window) && !prefersReduced) {
     });
 }
 
+/* Product Showcase — rotate app screens across laptop, phone & tabs */
+(function initProductShowcase() {
+  const laptopTrack = document.getElementById("psLaptopTrack");
+  const phoneTrack = document.getElementById("psPhoneTrack");
+  const tabsWrap = document.getElementById("psTabs");
+  if (!laptopTrack || !tabsWrap) return;
+
+  const laptopScreens = Array.from(laptopTrack.children);
+  const phoneScreens = phoneTrack ? Array.from(phoneTrack.children) : [];
+  const tabs = Array.from(tabsWrap.children);
+  let active = 0;
+  let timer;
+
+  function setActive(i) {
+    active = i;
+    laptopScreens.forEach((s, idx) => s.classList.toggle("active", idx === i));
+    phoneScreens.forEach((s, idx) => s.classList.toggle("active", idx === i));
+    tabs.forEach((t, idx) => t.classList.toggle("active", idx === i));
+  }
+
+  function next() {
+    setActive((active + 1) % laptopScreens.length);
+  }
+
+  function startAuto() {
+    clearInterval(timer);
+    if (!prefersReduced) timer = setInterval(next, 3200);
+  }
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener("click", () => {
+      setActive(i);
+      startAuto();
+    });
+  });
+
+  startAuto();
+})();
+
 /* mobile menu */
 const burger = document.getElementById("burger");
 const mobileMenu = document.getElementById("mobileMenu");
