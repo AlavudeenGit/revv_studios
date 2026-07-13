@@ -1234,7 +1234,7 @@ nav {
   border: 10px solid #171225;
   border-bottom: none;
   border-radius: 14px 14px 0 0;
-  aspect-ratio: 16/10;
+  aspect-ratio: 21/10;
   overflow: hidden;
   position: relative;
   box-shadow: var(--shadow-lg);
@@ -1262,7 +1262,7 @@ nav {
   position: absolute;
   z-index: 2;
   right: 2%;
-  bottom: -6%;
+  bottom: 21%;
   width: 108px;
   background: #171225;
   border: 6px solid #171225;
