@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - Revv Studios | AI Creative &amp; Marketing Agency</title>
+    <meta
+      name="description"
+      content="Meet the team behind Revv Studios — our story, mission, vision, values, and the people building AI-first creative and marketing work for ambitious brands."
+    />
+    <link rel="canonical" href="https://www.revvstudios.com/about.html" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#050507" />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Revv Studios" />
+    <meta property="og:title" content="About Us — Revv Studios" />
+    <meta
+      property="og:description"
+      content="Our story, mission, vision, values, and the team building AI-first creative and marketing work for ambitious brands."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.revvstudios.com/about.html" />
+    <meta
+      property="og:image"
+      content="https://www.revvstudios.com/assets/og-image.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="About Us — Revv Studios" />
+    <meta
+      name="twitter:description"
+      content="Our story, mission, vision, values, and the team building AI-first creative and marketing work for ambitious brands."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.revvstudios.com/assets/og-image.jpg"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.13/lenis.min.js"
+      defer
+    ></script>
+    <link rel="icon" type="image/png" href="asset/image/rev.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- JSON-LD: Organization -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Revv Studios",
+        "url": "https://www.revvstudios.com/",
+        "logo": "https://www.revvstudios.com/assets/logo.png",
+        "email": "hello@revvstudios.com",
+        "telephone": "+91-98765-43210",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Chennai",
+          "addressRegion": "Tamil Nadu",
+          "addressCountry": "IN"
+        }
+      }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.revvstudios.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "About",
+            "item": "https://www.revvstudios.com/about.html"
+          }
+        ]
+      }
+    </script>
+
+    <!-- JSON-LD: AboutPage -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "About Revv Studios",
+        "url": "https://www.revvstudios.com/about.html",
+        "description": "Our story, mission, vision, values, and the team building AI-first creative and marketing work for ambitious brands.",
+        "publisher": { "@type": "Organization", "name": "Revv Studios" }
+      }
+    </script>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="cursor" id="cursor"></div>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- GALAXY BACKGROUND: fixed starfield + drifting nebula glows -->
+    <canvas id="galaxyCanvas" aria-hidden="true"></canvas>
+    <div class="nebula-layer" id="nebulaLayer" aria-hidden="true">
+      <span class="n1"></span>
+      <span class="n2"></span>
+      <span class="n3"></span>
+    </div>
+    <div class="aurora-layer" aria-hidden="true"></div>
+    <div class="fog-layer" aria-hidden="true"></div>
+    <div class="grain-overlay" aria-hidden="true"></div>
+
+    <header id="siteHeader">
+      <div class="wrap">
+        <nav>
+          <a href="index.html" class="logo">
+            <img src="asset/image/revv.png" alt="Revv Studios" />
+          </a>
+          <div class="nav-links">
+            <a href="index.html#services">Services</a>
+            <a href="index.html#projects">Work</a>
+            <a href="index.html#product">Product</a>
+            <a href="index.html#success-stories">Success Stories</a>
+            <a href="index.html#industries">Industries</a>
+            <!-- <a href="index.html#pricing">Pricing</a> -->
+            <a href="about.html" aria-current="page">About</a>
+            <a href="blog.html">Blog</a>
+            <a href="index.html#contact">Contact</a>
+          </div>
+          <div class="nav-cta">
+            <a href="index.html#contact" class="btn btn-primary magnetic"
+              >Start Your Project</a
+            >
+            <button
+              class="burger"
+              id="burger"
+              aria-label="Toggle navigation menu"
+              aria-expanded="false"
+              aria-controls="mobileMenu"
+              type="button"
+            >
+              <span></span><span></span><span></span>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#projects">Work</a>
+      <a href="index.html#product">Product</a>
+      <a href="index.html#success-stories">Success Stories</a>
+      <a href="index.html#industries">Industries</a>
+      <!-- <a href="index.html#pricing">Pricing</a> -->
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+
+    <main id="main-content">
+      <!-- PAGE HERO -->
+      <section class="page-hero cine-host" aria-labelledby="about-h1">
+        <div class="hero-vignette"></div>
+        <div class="wrap">
+          <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">About</span>
+          </nav>
+          <div class="eyebrow">About Revv Studios</div>
+          <h1 id="about-h1">
+            An AI-first studio built for brands that refuse to look ordinary.
+          </h1>
+          <p class="page-hero-sub">
+            We're a small, hands-on team based in Chennai, working with clients
+            across India, the UAE, and the GCC region.
+          </p>
+        </div>
+      </section>
+
+      <!-- STORY -->
+      <section class="section-pad cine-host" id="story">
+        <div class="wrap about-grid">
+          <div class="about-visual reveal">
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring"></div>
+            <div class="core"></div>
+          </div>
+          <div class="reveal">
+            <div class="eyebrow">Our Story</div>
+            <h2>From a two-person freelance shop to a full-service studio.</h2>
+            <p>
+              Revv Studios started as a freelance operation producing AI content
+              for a handful of early clients. What began as short video
+              production quickly grew into full campaigns — and then into
+              complete digital builds, as clients kept asking us to solve
+              problems well beyond the original brief.
+            </p>
+            <p>
+              Today, we sit at the intersection of creative direction,
+              data-driven marketing, and applied AI. We don't bolt AI onto old
+              workflows — we design campaigns, videos, and websites around
+              what's possible today, for recruitment agencies, facility
+              management platforms, coaching brands, and fast-growing SMEs
+              across India and the Gulf.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- MISSION & VISION -->
+      <section class="section-pad bg-section cine-host" id="mission-vision">
+        <div class="wrap">
+          <div class="mv-grid">
+            <div class="mv-card reveal">
+              <div class="why-ico" aria-hidden="true">🎯</div>
+              <h2>Our Mission</h2>
+              <p>
+                To give ambitious, resource-constrained brands access to the
+                same caliber of AI-powered creative and engineering that large
+                enterprises pay agency-of-record rates for — without the
+                overhead or the bureaucracy.
+              </p>
+            </div>
+            <div class="mv-card reveal">
+              <div class="why-ico" aria-hidden="true">🔭</div>
+              <h2>Our Vision</h2>
+              <p>
+                A world where a founder in Chennai or Dubai can compete for
+                attention with any global brand, because the tools to produce
+                world-class creative are no longer gated behind enterprise
+                budgets.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VALUES -->
+      <section class="section-pad cine-host" id="values">
+        <div class="wrap">
+          <div class="section-head center">
+            <div class="eyebrow">Our Values</div>
+            <h2>What we actually hold ourselves to.</h2>
+          </div>
+          <div class="why-grid">
+            <div class="why-card reveal">
+              <div class="why-ico" aria-hidden="true">🧭</div>
+              <h3>Strategy Before Pixels</h3>
+              <p>
+                We don't design or write a line of code until we understand the
+                business outcome it's meant to drive.
+              </p>
+            </div>
+            <div class="why-card reveal">
+              <div class="why-ico" aria-hidden="true">🔍</div>
+              <h3>Radical Transparency</h3>
+              <p>
+                Clear scopes, honest timelines, and straight answers — even when
+                the answer is "that won't work."
+              </p>
+            </div>
+            <div class="why-card reveal">
+              <div class="why-ico" aria-hidden="true">⚙️</div>
+              <h3>Craft Over Shortcuts</h3>
+              <p>
+                AI accelerates our workflow — it doesn't replace the judgment
+                and taste that make work actually land.
+              </p>
+            </div>
+            <div class="why-card reveal">
+              <div class="why-ico" aria-hidden="true">📐</div>
+              <h3>Data-Backed Decisions</h3>
+              <p>
+                Every campaign ships with tracking wired in — opinions are
+                welcome, but the data settles arguments.
+              </p>
+            </div>
+            <div class="why-card reveal">
+              <div class="why-ico" aria-hidden="true">🤝</div>
+              <h3>Long-Term Relationships</h3>
+              <p>
+                We'd rather do great work for fewer clients over years than
+                churn through logos for a portfolio.
+              </p>
+            </div>
+            <div class="why-card reveal">
+              <div class="why-ico" aria-hidden="true">🌱</div>
+              <h3>Always Learning</h3>
+              <p>
+                The AI tooling landscape moves monthly — we rebuild our own
+                workflows constantly so clients don't fall behind.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STATS -->
+      <section class="section-pad results-band cine-host" id="about-stats">
+        <div class="wrap">
+          <div class="section-head center">
+            <div class="eyebrow">By The Numbers</div>
+            <h2>A small team, a real track record.</h2>
+          </div>
+          <div class="results-grid">
+            <div class="result-stat reveal">
+              <div class="r-num">
+                <span class="accent" data-count="100">0</span>+
+              </div>
+              <p>Projects delivered</p>
+            </div>
+            <div class="result-stat reveal">
+              <div class="r-num">
+                <span class="accent" data-count="25">0</span>+
+              </div>
+              <p>Industries served</p>
+            </div>
+            <div class="result-stat reveal">
+              <div class="r-num">
+                <span class="accent" data-count="98">0</span>%
+              </div>
+              <p>Client satisfaction</p>
+            </div>
+            <div class="result-stat reveal">
+              <div class="r-num">
+                <span class="accent" data-count="3">0</span>
+              </div>
+              <p>Countries served</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEAM -->
+      <section class="section-pad cine-host" id="team">
+        <div class="wrap">
+          <div class="section-head center">
+            <div class="eyebrow">Our Team</div>
+            <h2>The people doing the work.</h2>
+            <p>
+              A lean, senior team — every account is staffed by people who
+              actually build, not just manage.
+            </p>
+          </div>
+          <div class="founders-grid team-grid">
+            <div class="founder-card reveal">
+              <div class="founder-photo" aria-hidden="true"><span>A</span></div>
+              <h3>Aladeen</h3>
+              <div class="founder-role">
+                Co-Founder &amp; Technical Director
+              </div>
+              <p class="founder-bio">
+                Leads full-stack engineering and AI integration across every
+                client build.
+              </p>
+              <div class="founder-socials">
+                <a href="#" aria-label="Aladeen on LinkedIn"
+                  ><i class="fab fa-linkedin"></i
+                ></a>
+                <a href="#" aria-label="Aladeen on GitHub"
+                  ><i class="fab fa-github"></i
+                ></a>
+              </div>
+            </div>
+            <div class="founder-card reveal">
+              <div class="founder-photo" aria-hidden="true"><span>R</span></div>
+              <h3>Co-Founder Name</h3>
+              <div class="founder-role">Co-Founder &amp; Creative Director</div>
+              <p class="founder-bio">
+                Oversees brand strategy and AI video direction across every
+                account.
+              </p>
+              <div class="founder-socials">
+                <a href="#" aria-label="Co-founder on LinkedIn"
+                  ><i class="fab fa-linkedin"></i
+                ></a>
+                <a href="#" aria-label="Co-founder on Instagram"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+              </div>
+            </div>
+            <div class="founder-card reveal">
+              <div class="founder-photo" aria-hidden="true"><span>T</span></div>
+              <h3>Design Lead</h3>
+              <div class="founder-role">Senior UI/UX Designer</div>
+              <p class="founder-bio">
+                Owns visual direction and interaction design across web and
+                product builds.
+              </p>
+              <div class="founder-socials">
+                <a href="#" aria-label="Design lead on LinkedIn"
+                  ><i class="fab fa-linkedin"></i
+                ></a>
+                <a href="#" aria-label="Design lead on Instagram"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+              </div>
+            </div>
+            <div class="founder-card reveal">
+              <div class="founder-photo" aria-hidden="true"><span>M</span></div>
+              <h3>Marketing Lead</h3>
+              <div class="founder-role">Performance Marketing Manager</div>
+              <p class="founder-bio">
+                Runs paid media strategy and reporting across the Scale and
+                Dominate plans.
+              </p>
+              <div class="founder-socials">
+                <a href="#" aria-label="Marketing lead on LinkedIn"
+                  ><i class="fab fa-linkedin"></i
+                ></a>
+                <a href="#" aria-label="Marketing lead on Twitter / X"
+                  ><i class="fab fa-twitter"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="section-pad bg-section cine-host" id="about-cta">
+        <div class="wrap">
+          <div class="audit-panel about-cta-panel">
+            <div class="audit-copy">
+              <div class="eyebrow">Work With Us</div>
+              <h2>Let's talk about what you're building.</h2>
+              <p>
+                Tell us where your brand is today and where you want it to be —
+                we'll tell you honestly whether we're the right fit.
+              </p>
+            </div>
+            <div class="about-cta-buttons">
+              <a href="index.html#contact" class="btn btn-primary magnetic full"
+                >Start a Project</a
+              >
+              <!-- <a href="index.html#pricing" class="btn btn-outline magnetic full"
+                >View Pricing</a
+              > -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="footer">
+      <div class="wrap">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a href="index.html" class="logo"
+              ><span class="dot"></span>Revv Studios</a
+            >
+            <p>
+              Revolutionizing brands with AI, creativity and technology — from
+              Chennai, for the world.
+            </p>
+            <div class="footer-social">
+              <a
+                href="https://www.instagram.com/revv__studios?igsh=ZnUzbGc4MWJ6YXFj"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="https://www.youtube.com/@RevvStudios"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+              >
+                <i class="fab fa-youtube"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/company/revv-studios/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+              >
+                <i class="fab fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+          <div class="fcol">
+            <h5>Services</h5>
+            <ul>
+              <li><a href="index.html#services">AI Creative</a></li>
+              <li><a href="index.html#services">Digital Marketing</a></li>
+              <li><a href="index.html#services">Web</a></li>
+              <li><a href="index.html#services">Branding</a></li>
+            </ul>
+          </div>
+          <div class="fcol">
+            <h5>Company</h5>
+            <ul>
+              <li><a href="about.html">About</a></li>
+              <li><a href="index.html#projects">Work</a></li>
+              <li><a href="index.html#founders">Founders</a></li>
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="fcol">
+            <h5>Industries</h5>
+            <ul>
+              <li><a href="index.html#industries">Recruitment</a></li>
+              <li><a href="index.html#industries">Facility Mgmt</a></li>
+              <li><a href="index.html#industries">Healthcare</a></li>
+              <li><a href="index.html#industries">Education</a></li>
+            </ul>
+          </div>
+          <div class="fcol">
+            <h5>Legal</h5>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Revv Studios. All rights reserved.</span>
+          <div class="flinks">
+            <a href="sitemap.xml">Sitemap</a><a href="#">Privacy</a
+            ><a href="#">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

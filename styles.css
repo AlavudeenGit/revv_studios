@@ -2655,3 +2655,775 @@ html {
     padding-right: env(safe-area-inset-right);
   }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   NEW SECTIONS — Why Choose Us, Success Stories, Founders, Audit
+   (appended; existing component styles above are untouched)
+   ══════════════════════════════════════════════════════════════ */
+
+/* Accessibility: skip-to-content link */
+.skip-link {
+  position: fixed;
+  top: -60px;
+  left: 16px;
+  z-index: 10000;
+  background: var(--primary);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: top 0.25s var(--ease);
+}
+.skip-link:focus {
+  top: 16px;
+}
+
+/* Burger is now a <button> — reset native styles */
+.burger {
+  background: none;
+  border: none;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* WHY CHOOSE US */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+.why-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 30px 26px;
+  transition:
+    transform 0.4s var(--ease),
+    border-color 0.4s var(--ease),
+    box-shadow 0.4s var(--ease);
+}
+.why-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(139, 108, 242, 0.4);
+  box-shadow: var(--shadow-md);
+}
+.why-ico {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 108, 242, 0.18),
+    rgba(53, 230, 200, 0.14)
+  );
+  margin-bottom: 18px;
+}
+.why-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+.why-card p {
+  color: var(--text-2);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+@media (max-width: 1024px) {
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* CLIENT SUCCESS STORIES */
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+.case-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 36px;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.4s var(--ease),
+    border-color 0.4s var(--ease),
+    box-shadow 0.4s var(--ease);
+}
+.case-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(139, 108, 242, 0.4);
+  box-shadow: var(--shadow-md);
+}
+.case-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.case-top strong {
+  display: block;
+  font-size: 0.98rem;
+}
+.case-top span {
+  font-size: 0.8rem;
+  color: var(--text-2);
+}
+.case-top > div:nth-child(2) {
+  flex: 1;
+}
+.case-stars {
+  color: var(--accent);
+  font-size: 0.82rem;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+}
+.case-body {
+  margin: 0 0 22px;
+}
+.case-body dt {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--primary);
+  margin: 16px 0 6px;
+}
+.case-body dt:first-child {
+  margin-top: 0;
+}
+.case-body dd {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.case-results {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+}
+.case-results li {
+  background: rgba(139, 108, 242, 0.1);
+  border: 1px solid rgba(139, 108, 242, 0.22);
+  border-radius: 12px;
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 84px;
+}
+.case-results strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.05rem;
+  color: #fff;
+}
+.case-results span {
+  font-size: 0.68rem;
+  color: var(--text-2);
+}
+.case-card .quote {
+  font-size: 0.94rem;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0 0 8px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.case-card cite {
+  font-style: normal;
+  font-size: 0.8rem;
+  color: var(--text-2);
+}
+@media (max-width: 900px) {
+  .case-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .case-card {
+    padding: 26px;
+  }
+  .case-results {
+    gap: 8px;
+  }
+  .case-results li {
+    min-width: 72px;
+    padding: 7px 10px;
+  }
+}
+
+/* MEET THE FOUNDERS */
+.founders-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+.founder-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 36px;
+  text-align: center;
+  transition:
+    transform 0.4s var(--ease),
+    border-color 0.4s var(--ease);
+}
+.founder-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(139, 108, 242, 0.4);
+}
+.founder-photo {
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+.founder-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+.founder-role {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+.founder-bio {
+  color: var(--text-2);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+.founder-vision {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.6;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+}
+.founder-socials {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.founder-socials a {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  color: var(--text-2);
+  text-decoration: none;
+  transition:
+    border-color 0.3s var(--ease),
+    color 0.3s var(--ease);
+}
+.founder-socials a:hover {
+  border-color: var(--primary);
+  color: #fff;
+}
+@media (max-width: 700px) {
+  .founders-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* FREE AUDIT */
+.audit-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 56px;
+  position: relative;
+  overflow: hidden;
+}
+.audit-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 15% 15%,
+    rgba(139, 108, 242, 0.14),
+    transparent 55%
+  );
+  pointer-events: none;
+}
+.audit-copy {
+  position: relative;
+}
+.audit-copy h2 {
+  font-size: clamp(1.8rem, 3vw, 2.3rem);
+  margin: 14px 0 16px;
+}
+.audit-copy > p {
+  color: var(--text-2);
+  line-height: 1.7;
+  margin-bottom: 26px;
+  max-width: 46ch;
+}
+.audit-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.audit-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.94rem;
+}
+.audit-benefits .ico {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(53, 230, 200, 0.15);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+.audit-form {
+  position: relative;
+  border-radius: 20px;
+  padding: 32px;
+}
+.audit-form.glass {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+}
+.audit-field {
+  margin-bottom: 18px;
+}
+.audit-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.audit-field label,
+.audit-row-2 label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 7px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+.audit-field input,
+.audit-row-2 input {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  font-family: "Inter", sans-serif;
+  font-size: 0.92rem;
+  background: rgba(255, 255, 255, 0.055);
+  color: var(--text);
+}
+.audit-field input:focus,
+.audit-row-2 input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.09);
+}
+.btn.full {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+.audit-note {
+  margin: 12px 0 0;
+  font-size: 0.84rem;
+  color: var(--accent);
+  min-height: 1.2em;
+}
+@media (max-width: 900px) {
+  .audit-panel {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 40px 28px;
+  }
+}
+@media (max-width: 500px) {
+  .audit-row-2 {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .audit-panel {
+    padding: 30px 22px;
+  }
+}
+
+/* BLOG TEASER (blog-card converted to a link) */
+.blog-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.blog-teaser-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 44px;
+}
+
+/* BUGFIX: mobile-menu overlay must be fully hidden on wider screens.
+   Previously it only relied on transform: translateY(-100%), so if it
+   was left open on a narrow window and the window was then resized
+   wider, the full-screen menu (and its per-link underline) stayed
+   visible on top of the desktop nav. */
+@media (min-width: 901px) {
+  .mobile-menu {
+    display: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SECONDARY PAGES — About & Blog
+   ══════════════════════════════════════════════════════════════ */
+
+/* Page hero (shorter than the homepage hero) */
+.page-hero {
+  position: relative;
+  padding: 200px 0 90px;
+  overflow: hidden;
+}
+.page-hero .wrap {
+  position: relative;
+  z-index: 1;
+}
+.page-hero h1 {
+  font-size: clamp(2.1rem, 4.4vw, 3.2rem);
+  margin: 14px 0 16px;
+  max-width: 18ch;
+}
+.page-hero-sub {
+  color: var(--text-2);
+  font-size: 1.05rem;
+  max-width: 56ch;
+  line-height: 1.7;
+}
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-3);
+  margin-bottom: 22px;
+}
+.breadcrumbs a {
+  color: var(--text-2);
+  text-decoration: none;
+  transition: color 0.3s var(--ease);
+}
+.breadcrumbs a:hover {
+  color: var(--primary);
+}
+.breadcrumbs [aria-current="page"] {
+  color: var(--text);
+}
+@media (max-width: 600px) {
+  .page-hero {
+    padding: 160px 0 60px;
+  }
+}
+
+/* Mission & Vision */
+.mv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+.mv-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px;
+}
+.mv-card h2 {
+  font-size: 1.4rem;
+  margin: 18px 0 12px;
+}
+.mv-card p {
+  color: var(--text-2);
+  line-height: 1.7;
+}
+@media (max-width: 700px) {
+  .mv-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Team grid — 4-up variant of founders-grid */
+.team-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+.team-grid .founder-card {
+  padding: 28px 22px;
+}
+.team-grid .founder-photo {
+  width: 72px;
+  height: 72px;
+  font-size: 1.4rem;
+}
+@media (max-width: 1024px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* About page CTA (reuses .audit-panel glass styling) */
+.about-cta-panel {
+  grid-template-columns: 1.3fr 0.7fr;
+}
+.about-cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+@media (max-width: 900px) {
+  .about-cta-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Blog page */
+.blog-hero-featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 44px;
+  align-items: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  overflow: hidden;
+}
+.blog-featured-thumb {
+  aspect-ratio: 4/3;
+  background: linear-gradient(150deg, #8b6cf2, #0b0912 75%);
+  position: relative;
+}
+.blog-featured-thumb .blog-cat {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+.blog-featured-body {
+  padding: 12px 40px 12px 0;
+}
+.blog-featured-body .blog-date {
+  margin-bottom: 10px;
+}
+.blog-featured-body h2 {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  margin-bottom: 14px;
+}
+.blog-featured-body p {
+  color: var(--text-2);
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+@media (max-width: 900px) {
+  .blog-hero-featured {
+    grid-template-columns: 1fr;
+  }
+  .blog-featured-body {
+    padding: 0 28px 32px;
+  }
+}
+
+.blog-layout {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 48px;
+  align-items: start;
+}
+.blog-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+.blog-cat-btn {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text-2);
+  cursor: pointer;
+  transition:
+    color 0.3s var(--ease),
+    border-color 0.3s var(--ease),
+    background 0.3s var(--ease);
+}
+.blog-cat-btn.active,
+.blog-cat-btn:hover {
+  color: #fff;
+  border-color: var(--primary);
+  background: rgba(139, 108, 242, 0.16);
+}
+.blog-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+.blog-sidebar {
+  position: sticky;
+  top: 110px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.blog-sidebar-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 26px;
+}
+.blog-sidebar-card h5 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+}
+.blog-sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.blog-sidebar-list a {
+  font-size: 0.86rem;
+  color: var(--text-2);
+  text-decoration: none;
+  line-height: 1.5;
+  transition: color 0.3s var(--ease);
+}
+.blog-sidebar-list a:hover {
+  color: var(--primary);
+}
+.blog-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.blog-tag-cloud span {
+  font-size: 0.74rem;
+  padding: 6px 12px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+}
+@media (max-width: 900px) {
+  .blog-layout {
+    grid-template-columns: 1fr;
+  }
+  .blog-sidebar {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .blog-sidebar-card {
+    flex: 1 1 240px;
+  }
+}
+@media (max-width: 600px) {
+  .blog-posts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.blog-empty-state {
+  text-align: center;
+  color: var(--text-2);
+  padding: 40px 0;
+  font-size: 0.94rem;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   AVATAR / LOGO IMAGES — Founders, Testimonials, Success Stories
+   Drop an <img> inside .founder-photo or .testi-avatar and it will
+   auto-fill the circle (cropped, centered, no distortion) with no
+   extra classes or markup changes needed.
+   ══════════════════════════════════════════════════════════════ */
+.founder-photo,
+.testi-avatar {
+  overflow: hidden;
+  position: relative;
+}
+.founder-photo img,
+.testi-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* If a real photo is present, hide the letter/initial fallback
+   automatically — no need to manually delete the <span> */
+.founder-photo:has(img) span {
+  display: none;
+}
+
+/* Company / client logo variant — same circular frame, but logos
+   usually shouldn't be cropped like a face photo, so contain +
+   pad on a soft plate instead of cover-cropping edge to edge.
+   Add this class alongside .testi-avatar, e.g.
+   <div class="testi-avatar testi-avatar--logo"><img ...></div> */
+.testi-avatar--logo {
+  background: #fff;
+  padding: 8px;
+}
+.testi-avatar--logo img {
+  object-fit: contain;
+  border-radius: 0;
+}

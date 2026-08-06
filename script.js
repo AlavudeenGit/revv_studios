@@ -164,12 +164,37 @@ const mobileMenu = document.getElementById("mobileMenu");
 burger.addEventListener("click", () => {
   mobileMenu.classList.toggle("open");
   burger.classList.toggle("active");
-});
-mobileMenu
-  .querySelectorAll("a")
-  .forEach((a) =>
-    a.addEventListener("click", () => mobileMenu.classList.remove("open")),
+  burger.setAttribute(
+    "aria-expanded",
+    burger.classList.contains("active") ? "true" : "false",
   );
+});
+mobileMenu.querySelectorAll("a").forEach((a) =>
+  a.addEventListener("click", () => {
+    mobileMenu.classList.remove("open");
+    burger.classList.remove("active");
+    burger.setAttribute("aria-expanded", "false");
+  }),
+);
+
+/* BUGFIX: if the menu is left open on a narrow window and the window
+   is then resized wider (e.g. laptop screen maximized), close it and
+   reset the burger state so the mobile overlay never shows on desktop. */
+const MOBILE_NAV_BREAKPOINT = 900;
+let navResizeTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(navResizeTimer);
+  navResizeTimer = setTimeout(() => {
+    if (
+      window.innerWidth > MOBILE_NAV_BREAKPOINT &&
+      mobileMenu.classList.contains("open")
+    ) {
+      mobileMenu.classList.remove("open");
+      burger.classList.remove("active");
+      burger.setAttribute("aria-expanded", "false");
+    }
+  }, 120);
+});
 
 /* hero text reveal */
 gsap.to(".hero h1 .line span", {
@@ -780,4 +805,32 @@ window.addEventListener("load", () => ScrollTrigger.refresh());
   } else {
     requestAnimationFrame(draw);
   }
+})();
+
+/* Free Audit form — client-side validation + confirmation message.
+   Replace the fetch() call below with your real form endpoint. */
+(function initAuditForm() {
+  const form = document.getElementById("auditForm");
+  const note = document.getElementById("auditNote");
+  if (!form) return;
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    // TODO: wire this up to your real backend / form service, e.g.:
+    // fetch("/api/audit-request", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(data),
+    // });
+
+    note.textContent =
+      "Thanks! Your audit request has been received — we'll email your report within 48 hours.";
+    form.reset();
+  });
 })();
