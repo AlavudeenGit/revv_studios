@@ -318,37 +318,37 @@ document.querySelectorAll(".faq-item").forEach((item) => {
 });
 
 function initProjectCards() {
-  document.querySelectorAll('.project-card').forEach((card) => {
-    const link = card.querySelector('.project-link');
-    const media = card.querySelector('.project-media');
-    const topic = card.dataset.projectTopic || 'Project';
+  document.querySelectorAll(".project-card").forEach((card) => {
+    const link = card.querySelector(".project-link");
+    const media = card.querySelector(".project-media");
+    const topic = card.dataset.projectTopic || "Project";
     const projectUrl = card.dataset.projectLink;
     if (!link) return;
 
     if (projectUrl) {
       link.href = projectUrl;
-      link.removeAttribute('disabled');
+      link.removeAttribute("disabled");
       if (media) {
-        media.style.cursor = 'pointer';
-        media.addEventListener('click', () => {
-          window.open(projectUrl, '_blank', 'noopener');
+        media.style.cursor = "pointer";
+        media.addEventListener("click", () => {
+          window.open(projectUrl, "_blank", "noopener");
         });
       }
     } else {
-      link.setAttribute('aria-disabled', 'true');
-      link.style.pointerEvents = 'none';
-      link.style.opacity = '0.6';
+      link.setAttribute("aria-disabled", "true");
+      link.style.pointerEvents = "none";
+      link.style.opacity = "0.6";
       if (media) {
-        media.style.cursor = 'default';
+        media.style.cursor = "default";
       }
     }
 
-    if (topic.toLowerCase().includes('app')) {
-      link.textContent = 'Open Web App';
-    } else if (topic.toLowerCase().includes('website')) {
-      link.textContent = 'Visit Website';
+    if (topic.toLowerCase().includes("app")) {
+      link.textContent = "Open Web App";
+    } else if (topic.toLowerCase().includes("website")) {
+      link.textContent = "Visit Website";
     } else {
-      link.textContent = 'View Project';
+      link.textContent = "View Project";
     }
   });
 }
@@ -601,7 +601,10 @@ window.addEventListener("load", () => ScrollTrigger.refresh());
     iframe.src = toEmbedUrl(videoUrl);
     iframe.title = frame.dataset.videoTitle || "Video showcase";
     iframe.loading = "lazy";
-    iframe.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture");
+    iframe.setAttribute(
+      "allow",
+      "autoplay; encrypted-media; picture-in-picture",
+    );
     iframe.setAttribute("allowfullscreen", "");
     iframe.setAttribute("playsinline", "1");
     iframe.setAttribute("frameborder", "0");
@@ -681,7 +684,9 @@ window.addEventListener("load", () => ScrollTrigger.refresh());
 
   function drawPlanets(time) {
     planets.forEach((p) => {
-      const drift = prefersReduced ? 0 : Math.sin(time * 0.00006 + p.driftPhase) * 14;
+      const drift = prefersReduced
+        ? 0
+        : Math.sin(time * 0.00006 + p.driftPhase) * 14;
       const parallaxY = (scrollY * p.depth * 0.04) % (h + 200);
       const px = p.x + drift;
       const py = p.y - parallaxY;
@@ -832,5 +837,43 @@ window.addEventListener("load", () => ScrollTrigger.refresh());
     note.textContent =
       "Thanks! Your audit request has been received — we'll email your report within 48 hours.";
     form.reset();
+  });
+})();
+
+/* Blog category filter (blog.html only — no-ops elsewhere since it
+   checks for #blogCategories/#blogPostsGrid before doing anything) */
+(function initBlogFilter() {
+  const catWrap = document.getElementById("blogCategories");
+  const grid = document.getElementById("blogPostsGrid");
+  const empty = document.getElementById("blogEmptyState");
+  if (!catWrap || !grid) return;
+
+  const buttons = Array.from(catWrap.querySelectorAll(".blog-cat-btn"));
+  const posts = Array.from(grid.querySelectorAll("[data-cat]"));
+  const sidebarLinks = document.querySelectorAll("[data-filter-link]");
+
+  function applyFilter(filter) {
+    let visibleCount = 0;
+    posts.forEach((post) => {
+      const match = filter === "all" || post.dataset.cat === filter;
+      post.style.display = match ? "" : "none";
+      if (match) visibleCount++;
+    });
+    buttons.forEach((b) =>
+      b.classList.toggle("active", b.dataset.filter === filter),
+    );
+    if (empty) empty.hidden = visibleCount !== 0;
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => applyFilter(btn.dataset.filter));
+  });
+
+  sidebarLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      applyFilter(link.dataset.filterLink);
+      grid.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   });
 })();

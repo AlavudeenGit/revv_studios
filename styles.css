@@ -786,7 +786,7 @@ nav {
   align-items: center;
 }
 .about-visual {
-  aspect-ratio: 4/5;
+  aspect-ratio: 5/3;
   border-radius: 28px;
   position: relative;
   overflow: hidden;
@@ -3426,4 +3426,51 @@ html {
 .testi-avatar--logo img {
   object-fit: contain;
   border-radius: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BLOG & STORY IMAGES — Articles, Featured Post, About "Our Story"
+   ══════════════════════════════════════════════════════════════ */
+
+/* Blog card thumbnails (index.html blog teaser + blog.html post grid).
+   BUGFIX: real <img> tags here were using raw width/height HTML
+   attributes (e.g. width="600" height="240") with no CSS override,
+   so the browser rendered them at that literal pixel size instead of
+   filling the card — causing overflow on narrower cards. This forces
+   the image to always fill its thumb box and crop to match, however
+   large or small the card actually renders. */
+.blog-thumb {
+    overflow: hidden;
+}
+
+.blog-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transform: scale(1.12);
+}
+
+/* Featured post thumbnail (blog.html hero article) */
+.blog-featured-thumb {
+  overflow: hidden;
+}
+.blog-featured-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transform: scale(1.12);
+}
+
+/* About "Our Story" visual — .about-visual already supports a full
+   <img> (see the existing .about-visual img rule). This just makes
+   the decorative pulse rings and glowing core auto-hide the moment
+   a real photo is dropped in, so you don't have to delete them
+   manually — same pattern as the founder-photo letter fallback. */
+.about-visual:has(img) .pulse-ring,
+.about-visual:has(img) .core {
+  display: none;
 }
