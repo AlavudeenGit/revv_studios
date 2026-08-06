@@ -814,30 +814,106 @@ window.addEventListener("load", () => ScrollTrigger.refresh());
 
 /* Free Audit form — client-side validation + confirmation message.
    Replace the fetch() call below with your real form endpoint. */
-(function initAuditForm() {
-  const form = document.getElementById("auditForm");
-  const note = document.getElementById("auditNote");
-  if (!form) return;
+/* ══════════════════════════════════════════════════════════════
+   FORM DELIVERY — sends every submission to contact.revvstudios@gmail.com
+   via Web3Forms (free, no backend needed).
 
-  form.addEventListener("submit", (e) => {
+   ONE-TIME SETUP (takes under a minute):
+   1. Go to https://web3forms.com
+   2. Enter contact.revvstudios@gmail.com and click "Create Access Key"
+   3. Web3Forms emails you a key immediately — no account/password needed
+   4. Paste that key into the two hidden <input name="access_key" ...>
+      fields in index.html (contact form + audit form), replacing
+      "YOUR_ACCESS_KEY"
+   That's it — both forms below will start delivering to your inbox.
+   ══════════════════════════════════════════════════════════════ */
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+
+function handleFormSubmit(form, note, successMessage) {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
-    const data = Object.fromEntries(new FormData(form).entries());
 
-    // TODO: wire this up to your real backend / form service, e.g.:
-    // fetch("/api/audit-request", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(data),
-    // });
+    const accessKey = form.querySelector('[name="access_key"]')?.value;
+    if (!accessKey || accessKey === "YOUR_ACCESS_KEY") {
+      if (note) {
+        note.textContent =
+          "Form isn't connected yet — add your Web3Forms access key in index.html (see comment above the form).";
+        note.style.color = "#ff6ec7";
+      }
+      console.warn(
+        "Web3Forms access_key not set — see the setup note above handleFormSubmit() in script.js.",
+      );
+      return;
+    }
 
-    note.textContent =
-      "Thanks! Your audit request has been received — we'll email your report within 48 hours.";
-    form.reset();
+    const submitBtn = form.querySelector('button[type="submit"], .btn');
+    const originalBtnText = submitBtn ? submitBtn.textContent : "";
+    if (submitBtn) {
+      submitBtn.textContent = "Sending…";
+      submitBtn.disabled = true;
+    }
+    if (note) {
+      note.style.color = "";
+      note.textContent = "";
+    }
+
+    try {
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      });
+      const result = await res.json();
+
+      if (result.success) {
+        if (note) note.textContent = successMessage;
+        form.reset();
+      } else {
+        if (note) {
+          note.textContent =
+            "Something went wrong sending that — please try again or email us directly.";
+          note.style.color = "#ff6ec7";
+        }
+      }
+    } catch (err) {
+      if (note) {
+        note.textContent =
+          "Network error — please check your connection and try again.";
+        note.style.color = "#ff6ec7";
+      }
+    } finally {
+      if (submitBtn) {
+        submitBtn.textContent = originalBtnText;
+        submitBtn.disabled = false;
+      }
+    }
   });
+}
+
+(function initAuditForm() {
+  const form = document.getElementById("auditForm");
+  const note = document.getElementById("auditNote");
+  if (!form) return;
+  handleFormSubmit(
+    form,
+    note,
+    "Thanks! Your audit request has been received — we'll email your report within 48 hours.",
+  );
+})();
+
+(function initContactForm() {
+  const form = document.getElementById("contactForm");
+  const note = document.getElementById("contactNote");
+  if (!form) return;
+  handleFormSubmit(
+    form,
+    note,
+    "Thanks — your message has been sent! We'll get back to you shortly.",
+  );
 })();
 
 /* Blog category filter (blog.html only — no-ops elsewhere since it
