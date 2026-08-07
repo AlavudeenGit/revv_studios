@@ -918,7 +918,7 @@ nav {
 }
 @media (max-width: 600px) {
   .service-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: -1fr;
   }
 }
 
@@ -1774,7 +1774,7 @@ nav {
 }
 .industry-cell {
   background: var(--card);
-  padding: 34px 24px;
+  padding: 34px 14px;
   transition: background 0.3s var(--ease);
   cursor: default;
 }
@@ -1798,7 +1798,7 @@ nav {
 }
 @media (max-width: 900px) {
   .industries-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, -1fr);
   }
 }
 
@@ -2595,7 +2595,7 @@ footer {
     gap: 36px;
   }
   .footer-top {
-    grid-template-columns: 1fr;
+    grid-template-columns: -1fr;
     gap: 32px;
     padding-bottom: 40px;
   }
@@ -2741,7 +2741,7 @@ html {
 }
 @media (max-width: 480px) {
   .why-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: -1fr;
   }
 }
 
