@@ -3440,16 +3440,16 @@ html {
    the image to always fill its thumb box and crop to match, however
    large or small the card actually renders. */
 .blog-thumb {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .blog-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    transform: scale(1.12);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transform: scale(1.12);
 }
 
 /* Featured post thumbnail (blog.html hero article) */
